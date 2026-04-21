@@ -162,23 +162,15 @@ export function Location() {
             Abrir en Google Maps
           </a>
         </div>
-        <a 
-          href="https://www.google.com/maps/search/?api=1&query=Pasaje+Santa+Cruz+205,+Cayma,+Arequipa"
-          target="_blank"
-          className="flex-1 w-full h-[280px] sm:h-[350px] md:h-[400px] rounded-3xl overflow-hidden shadow-2xl relative reveal-right hover:scale-[1.02] transition-transform duration-500 block group"
-        >
-          <div className="absolute inset-0 bg-gold/10 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity z-10 pointer-events-none">
-             <span className="bg-white text-black px-6 py-2 rounded-full font-montserrat text-[10px] uppercase tracking-widest shadow-xl pointer-events-none">Abrir en Google Maps</span>
-          </div>
-          <iframe 
-            src="https://maps.google.com/maps?q=Pasaje%20Santa%20Cruz%20205,%20Cayma,%20Arequipa&t=&z=17&ie=UTF8&iwloc=&output=embed" 
-            width="100%" 
-            height="100%" 
-            style={{ border: 0, pointerEvents: "none" }} 
-            allowFullScreen 
-            loading="lazy" 
-          ></iframe>
-        </a>
+        <div className="w-full md:flex-1 h-[300px] sm:h-[380px] md:h-[420px] rounded-3xl overflow-hidden shadow-2xl relative reveal-right">
+          <iframe
+            src="https://maps.google.com/maps?q=Pasaje%20Santa%20Cruz%20205,%20Cayma,%20Arequipa&t=&z=17&ie=UTF8&iwloc=&output=embed"
+            style={{ border: 0, width: "100%", height: "100%", display: "block" }}
+            allowFullScreen
+            loading="lazy"
+            title="Ubicación Expressive"
+          />
+        </div>
       </div>
     </section>
   );
