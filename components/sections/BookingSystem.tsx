@@ -47,6 +47,7 @@ export default function BookingSystem() {
           email,
           service,
           date: date.toLocaleDateString("es-ES", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }),
+          dateISO: date.toISOString().split("T")[0],
           time: selectedTime,
         }),
       });
