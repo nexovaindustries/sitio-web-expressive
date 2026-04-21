@@ -85,22 +85,61 @@ export default function BookingSystem() {
   }
 
   return (
-    <section className="py-32 bg-[#FDFDFD] scroll-mt-24" id="booking">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="py-32 bg-black scroll-mt-24 relative overflow-hidden" id="booking">
+
+      {/* Fondo negro geométrico dorado */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: "radial-gradient(rgba(212,175,55,0.08) 1px, transparent 1px)",
+            backgroundSize: "30px 30px",
+          }}
+        />
+        <div className="absolute -top-[20%] -right-[5%] w-[60vw] h-[60vw] border border-[#D4AF37]/[0.06] rounded-full animate-[spin_100s_linear_infinite]" />
+        <div className="absolute -bottom-[20%] -left-[5%] w-[50vw] h-[50vw] border border-[#D4AF37]/[0.05] rounded-full animate-[spin_80s_linear_infinite_reverse]" />
+        <div
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-px"
+          style={{ background: "linear-gradient(to right, transparent, rgba(212,175,55,0.35), transparent)" }}
+        />
+        <div
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-px"
+          style={{ background: "linear-gradient(to right, transparent, rgba(212,175,55,0.35), transparent)" }}
+        />
+        {/* Ornamentos */}
+        <div className="absolute top-10 left-10 opacity-35">
+          <div className="w-8 h-px bg-[#D4AF37]" /><div className="w-px h-8 bg-[#D4AF37]" />
+        </div>
+        <div className="absolute top-10 right-10 flex flex-col items-end opacity-35">
+          <div className="w-8 h-px bg-[#D4AF37]" /><div className="w-px h-8 bg-[#D4AF37] self-end" />
+        </div>
+        <div className="absolute bottom-10 left-10 flex flex-col-reverse opacity-35">
+          <div className="w-8 h-px bg-[#D4AF37]" /><div className="w-px h-8 bg-[#D4AF37]" />
+        </div>
+        <div className="absolute bottom-10 right-10 flex flex-col-reverse items-end opacity-35">
+          <div className="w-8 h-px bg-[#D4AF37]" /><div className="w-px h-8 bg-[#D4AF37] self-end" />
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="mb-16 text-center">
-          <span className="font-montserrat text-[10px] uppercase tracking-[0.4em] text-gold font-semibold mb-4 block">Reservas Online</span>
-          <h2 className="font-playfair text-4xl md:text-5xl text-black tracking-tight">Agenda tu Experiencia</h2>
-          <p className="font-montserrat text-sm text-gray-500 mt-4">Selecciona el día y la hora que mejor te convenga.</p>
+          <div className="inline-flex items-center gap-4 mb-4">
+            <div className="w-8 h-px bg-[#D4AF37]/60" />
+            <span className="font-montserrat text-[10px] uppercase tracking-[0.5em] text-[#D4AF37] font-semibold">Reservas Online</span>
+            <div className="w-8 h-px bg-[#D4AF37]/60" />
+          </div>
+          <h2 className="font-playfair text-4xl md:text-5xl text-white tracking-tight">Agenda tu Experiencia</h2>
+          <p className="font-montserrat text-sm text-gray-400 mt-4">Selecciona el día y la hora que mejor te convenga.</p>
         </div>
 
         <Card className="max-w-4xl mx-auto shadow-2xl border-none overflow-hidden reveal">
           <div className="grid md:grid-cols-12">
-            <div className="md:col-span-8 p-6 md:p-10 bg-white border-r border-gray-100">
+            <div className="md:col-span-8 p-4 md:p-10 bg-white border-b md:border-b-0 md:border-r border-gray-100 overflow-x-auto">
               <Calendar
                 mode="single"
                 selected={date}
                 onSelect={setDate}
-                className="mx-auto"
+                className="mx-auto w-full max-w-full"
                 disabled={(day) => {
                   const today = new Date();
                   today.setHours(0, 0, 0, 0);

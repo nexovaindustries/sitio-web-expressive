@@ -13,38 +13,101 @@ export default function Home() {
       <Navbar />
       
       <Hero />
+
+      {/* Divisor dorado entre secciones */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent" />
+
       <Services />
+
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent" />
+
       <BookingSystem />
+
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent" />
+
       <Gallery />
+
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent" />
+
       <Location />
 
-      <footer className="bg-black text-white py-20">
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12">
-          <div className="md:col-span-2">
-            <h3 className="font-playfair text-3xl text-gold mb-6 uppercase tracking-widest">Expressive</h3>
-            <p className="font-montserrat text-sm text-gray-500 max-w-sm leading-relaxed">
-              Elevando los estándares de la belleza en Arequipa a través de tecnología avanzada y rituales curados de bienestar.
-            </p>
-          </div>
-          <div>
-            <h4 className="font-montserrat text-[10px] uppercase tracking-[0.3em] text-white mb-6 font-bold">Navegación</h4>
-            <ul className="font-montserrat text-xs space-y-4 text-gray-500">
-              <li><a href="#services" className="hover:text-gold transition-colors">Servicios</a></li>
-              <li><a href="#gallery" className="hover:text-gold transition-colors">Galería</a></li>
-              <li><a href="#booking" className="hover:text-gold transition-colors">Reservar Cita</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-montserrat text-[10px] uppercase tracking-[0.3em] text-white mb-6 font-bold">Contacto</h4>
-            <ul className="font-montserrat text-xs space-y-4 text-gray-500">
-              <li>Pasaje Santa Cruz 205, Cayma</li>
-              <li>951 108 796</li>
-              <li>Arequipa, Perú</li>
-            </ul>
-          </div>
+      {/* Footer premium */}
+      <footer className="bg-black text-white relative overflow-hidden">
+
+        {/* Fondo geométrico del footer */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: "radial-gradient(rgba(212,175,55,0.06) 1px, transparent 1px)",
+              backgroundSize: "28px 28px",
+            }}
+          />
+          {/* Línea dorada superior */}
+          <div
+            className="absolute top-0 left-0 right-0 h-px"
+            style={{ background: "linear-gradient(to right, transparent, rgba(212,175,55,0.5), transparent)" }}
+          />
+          {/* Destello diagonal */}
+          <svg className="absolute inset-0 w-full h-full opacity-[0.03]" preserveAspectRatio="none">
+            <line x1="0" y1="100%" x2="100%" y2="0" stroke="#D4AF37" strokeWidth="1" />
+          </svg>
+          {/* Anillo decorativo */}
+          <div className="absolute -bottom-1/2 -right-1/4 w-[60vw] h-[60vw] border border-[#D4AF37]/[0.05] rounded-full" />
         </div>
-        <div className="max-w-7xl mx-auto px-6 mt-20 pt-10 border-t border-white/5 text-center text-[10px] uppercase tracking-[0.4em] text-gray-600">
-          © {new Date().getFullYear()} Expressive · Estética Facial & Corporal
+
+        <div className="max-w-7xl mx-auto px-6 md:px-12 pt-20 pb-8 relative z-10">
+          <div className="grid md:grid-cols-4 gap-12 mb-16">
+
+            <div className="md:col-span-2">
+              {/* Logo en texto elegante */}
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-6 h-px bg-[#D4AF37]/70" />
+                <h3 className="font-playfair text-3xl text-[#D4AF37] uppercase tracking-widest">Expressive</h3>
+              </div>
+              <p className="font-montserrat text-xs text-gray-500 max-w-xs leading-relaxed mb-8">
+                Elevando los estándares de la belleza en Arequipa a través de tecnología avanzada y rituales curados de bienestar.
+              </p>
+              {/* Línea decorativa dorada */}
+              <div className="w-16 h-px bg-gradient-to-r from-[#D4AF37]/60 to-transparent" />
+            </div>
+
+            <div>
+              <h4 className="font-montserrat text-[9px] uppercase tracking-[0.4em] text-[#D4AF37]/80 mb-6 font-bold">Navegación</h4>
+              <ul className="font-montserrat text-xs space-y-4 text-gray-500">
+                <li><a href="#services" className="hover:text-[#D4AF37] transition-colors duration-300">Servicios</a></li>
+                <li><a href="#gallery"  className="hover:text-[#D4AF37] transition-colors duration-300">Galería</a></li>
+                <li><a href="#booking"  className="hover:text-[#D4AF37] transition-colors duration-300">Reservar Cita</a></li>
+                <li><a href="#ubicacion" className="hover:text-[#D4AF37] transition-colors duration-300">Ubicación</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-montserrat text-[9px] uppercase tracking-[0.4em] text-[#D4AF37]/80 mb-6 font-bold">Contacto</h4>
+              <ul className="font-montserrat text-xs space-y-4 text-gray-500">
+                <li>Pasaje Santa Cruz 205, Cayma</li>
+                <li>951 108 796</li>
+                <li>Arequipa, Perú</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Línea divisora inferior */}
+          <div
+            className="w-full h-px mb-8"
+            style={{ background: "linear-gradient(to right, transparent, rgba(212,175,55,0.2), transparent)" }}
+          />
+
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="font-montserrat text-[9px] uppercase tracking-[0.4em] text-gray-700">
+              © {new Date().getFullYear()} Expressive · Estética Facial & Corporal
+            </p>
+            <div className="flex items-center gap-2 opacity-50">
+              <div className="w-4 h-px bg-[#D4AF37]" />
+              <div className="w-1 h-1 rounded-full bg-[#D4AF37]" />
+              <div className="w-4 h-px bg-[#D4AF37]" />
+            </div>
+          </div>
         </div>
       </footer>
 

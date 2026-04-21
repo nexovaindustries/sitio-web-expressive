@@ -88,11 +88,39 @@ export default function Services() {
   );
 
   return (
-    <section className="py-32 relative z-10" id="services">
-      <div className="max-w-7xl mx-auto px-6 md:px-16">
+    <section className="py-32 relative z-10 bg-white" id="services">
+
+      {/* Fondo geométrico de sección */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Grid de líneas finas */}
+        <div
+          className="absolute inset-0 opacity-[0.4]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(212,175,55,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(212,175,55,0.06) 1px, transparent 1px)",
+            backgroundSize: "80px 80px",
+          }}
+        />
+        {/* Destello dorado superior */}
+        <div
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[2px]"
+          style={{ background: "linear-gradient(to right, transparent, rgba(212,175,55,0.35), transparent)" }}
+        />
+        {/* Destello dorado inferior */}
+        <div
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[2px]"
+          style={{ background: "linear-gradient(to right, transparent, rgba(212,175,55,0.25), transparent)" }}
+        />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 md:px-16 relative z-10">
         <div className="mb-20 text-center">
-          <span className="font-montserrat text-[10px] uppercase tracking-[0.4em] text-gold font-semibold mb-4 block">Experiencia Curada</span>
-          <h2 className="font-playfair text-4xl md:text-6xl text-black tracking-tight mt-6">Nuestros Rituales Estéticos</h2>
+          <div className="inline-flex items-center gap-4 mb-4">
+            <div className="w-8 h-px bg-[#D4AF37]/60" />
+            <span className="font-montserrat text-[10px] uppercase tracking-[0.5em] text-[#D4AF37] font-semibold">Experiencia Curada</span>
+            <div className="w-8 h-px bg-[#D4AF37]/60" />
+          </div>
+          <h2 className="font-playfair text-4xl md:text-6xl text-black tracking-tight mt-4">Nuestros Rituales Estéticos</h2>
         </div>
 
         {/* Categories */}
@@ -116,7 +144,35 @@ export default function Services() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {(activeCategory === "Todos" || activeCategory === "Rejuvenecimiento") && (
             <div className="lg:col-span-2 bg-black p-12 md:p-16 flex flex-col md:flex-row items-center justify-between gap-12 group overflow-hidden relative reveal">
-              <div className="absolute inset-0 bg-gold/5 -translate-x-full group-hover:translate-x-0 transition-transform duration-1000"></div>
+              {/* Fondo negro con geometría dorada */}
+              <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                {/* Dot grid dorado sobre negro */}
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    backgroundImage: "radial-gradient(rgba(212,175,55,0.12) 1px, transparent 1px)",
+                    backgroundSize: "28px 28px",
+                  }}
+                />
+                {/* Anillo decorativo */}
+                <div className="absolute -top-1/4 -right-1/4 w-[600px] h-[600px] border border-[#D4AF37]/[0.08] rounded-full animate-[spin_90s_linear_infinite]" />
+                {/* Línea diagonal */}
+                <svg className="absolute inset-0 w-full h-full opacity-[0.05]" preserveAspectRatio="none">
+                  <line x1="0" y1="100%" x2="100%" y2="0" stroke="#D4AF37" strokeWidth="1" />
+                </svg>
+                {/* Ornamento esquina superior derecha */}
+                <div className="absolute top-5 right-5 flex flex-col items-end opacity-40">
+                  <div className="w-8 h-px bg-[#D4AF37]" />
+                  <div className="w-px h-8 bg-[#D4AF37] self-end" />
+                </div>
+                {/* Ornamento esquina inferior izquierda */}
+                <div className="absolute bottom-5 left-5 flex flex-col-reverse opacity-40">
+                  <div className="w-8 h-px bg-[#D4AF37]" />
+                  <div className="w-px h-8 bg-[#D4AF37]" />
+                </div>
+                {/* Shimmer hover */}
+                <div className="absolute inset-0 bg-[#D4AF37]/[0.04] -translate-x-full group-hover:translate-x-0 transition-transform duration-1000" />
+              </div>
               <div className="relative z-10 max-w-xl">
                 <span className="font-montserrat text-[10px] uppercase tracking-[0.3em] text-gold mb-6 block">Premium Rejuvenation</span>
                 <h3 className="font-playfair text-3xl text-white mb-6">Ritual de Juventud</h3>

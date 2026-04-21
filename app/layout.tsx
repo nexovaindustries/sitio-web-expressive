@@ -26,6 +26,7 @@ export default function RootLayout({
     <html lang="es" className="scroll-smooth">
       <head>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" />
+        <style>{`* { cursor: none !important; }`}</style>
       </head>
       <body
         className={`${playfair.variable} ${montserrat.variable} font-body antialiased selection:bg-gold selection:text-white`}
