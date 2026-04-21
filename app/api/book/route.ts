@@ -2,8 +2,6 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { google } from "googleapis";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 async function createCalendarEvent(
   name: string,
   email: string,
@@ -163,6 +161,7 @@ export async function POST(req: Request) {
 
     const adminEmail = process.env.ADMIN_EMAIL;
     const fromEmail = process.env.RESEND_FROM_EMAIL || "Expressive <onboarding@resend.dev>";
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     const [calendarResult, clientEmailResult, adminEmailResult] = await Promise.allSettled([
       // 1. Crear evento en Google Calendar
