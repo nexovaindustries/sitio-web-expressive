@@ -27,6 +27,8 @@ async function createCalendarEvent(
   const startDateTime = `${dateISO}T${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}:00`;
   const endDateTime = `${dateISO}T${String(hour + 1).padStart(2, "0")}:${String(minute).padStart(2, "0")}:00`;
 
+  const isValidEmail = (e: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
+
   const event = await calendar.events.insert({
     calendarId,
     sendUpdates: "all",
@@ -35,7 +37,7 @@ async function createCalendarEvent(
       description: `Cliente: ${name}\nEmail: ${email || "No proporcionado"}\nServicio: ${service}`,
       start: { dateTime: startDateTime, timeZone: "America/Lima" },
       end: { dateTime: endDateTime, timeZone: "America/Lima" },
-      attendees: email ? [{ email }] : [],
+      attendees: email && isValidEmail(email) ? [{ email }] : [],
       reminders: {
         useDefault: false,
         overrides: [
@@ -159,16 +161,17 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Faltan campos requeridos" }, { status: 400 });
     }
 
-    const adminEmail = process.env.ADMIN_EMAIL;
-    const fromEmail = process.env.RESEND_FROM_EMAIL || "Expressive <onboarding@resend.dev>";
-    const resend = new Resend(process.env.RESEND_API_KEY);
+    const adminEmail = process.env.ADMIN_EMAIL || "estetica.expressive@gmail.com";
+    const resendApiKey = process.env.RESEND_API_KEY;
+    const resend = resendApiKey ? new Resend(resendApiKey) : null;
+    const fromEmail = "Expressive <onboarding@resend.dev>";
 
     const [calendarResult, clientEmailResult, adminEmailResult] = await Promise.allSettled([
       // 1. Crear evento en Google Calendar
       dateISO ? createCalendarEvent(name, email, service, dateISO, time) : Promise.resolve(null),
 
       // 2. Email de confirmación al cliente
-      email
+      email && resend
         ? resend.emails.send({
             from: fromEmail,
             to: [email],
@@ -178,7 +181,7 @@ export async function POST(req: Request) {
         : Promise.resolve(null),
 
       // 3. Notificación interna al admin
-      adminEmail
+      adminEmail && resend
         ? resend.emails.send({
             from: fromEmail,
             to: [adminEmail],

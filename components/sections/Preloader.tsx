@@ -4,22 +4,96 @@ import { useEffect, useState } from "react";
 
 export default function Preloader() {
   const [loading, setLoading] = useState(true);
+  const [phase, setPhase] = useState<"glow" | "fade">("glow");
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1500);
-    return () => clearTimeout(timer);
+    // After 1.8s start fade out
+    const fadeTimer = setTimeout(() => setPhase("fade"), 1800);
+    // Remove preloader after fade completes
+    const removeTimer = setTimeout(() => setLoading(false), 2400);
+    return () => {
+      clearTimeout(fadeTimer);
+      clearTimeout(removeTimer);
+    };
   }, []);
 
   if (!loading) return null;
 
   return (
-    <div id="preloader" className="fixed inset-0 z-[9999] flex flex-col items-center justify-center">
-      <div className="preloader-line w-[1px] h-[100px]"></div>
-      <p className="mt-8 font-playfair text-2xl tracking-[0.2em] uppercase text-gold font-light animate-pulse">
-        Expressive
-      </p>
+    <div
+      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black"
+      style={{
+        opacity: phase === "fade" ? 0 : 1,
+        transition: "opacity 0.6s ease-out",
+      }}
+    >
+      {/* LED horizontal glow strip behind the logo */}
+      <div className="relative flex flex-col items-center">
+
+        {/* Top LED strip */}
+        <div
+          className="w-48 h-px mb-8"
+          style={{
+            background: "linear-gradient(to right, transparent, #BF953F, #FCF6BA, #D4AF37, #FCF6BA, #BF953F, transparent)",
+            boxShadow: "0 0 12px 4px rgba(212,175,55,0.6), 0 0 30px 8px rgba(212,175,55,0.25)",
+            animation: "ledPulse 1.8s ease-in-out infinite",
+          }}
+        />
+
+        {/* Logo text with LED glow effect */}
+        <div className="relative">
+          {/* Glow layer behind text */}
+          <p
+            className="font-playfair text-4xl tracking-[0.35em] uppercase font-light absolute inset-0 flex items-center justify-center select-none"
+            style={{
+              color: "#D4AF37",
+              filter: "blur(12px)",
+              opacity: 0.7,
+              animation: "ledPulse 1.8s ease-in-out infinite",
+            }}
+          >
+            Expressive
+          </p>
+          {/* Crisp text on top */}
+          <p
+            className="font-playfair text-4xl tracking-[0.35em] uppercase font-light relative"
+            style={{
+              background: "linear-gradient(135deg, #BF953F 0%, #FCF6BA 40%, #D4AF37 60%, #AA771C 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              animation: "ledPulse 1.8s ease-in-out infinite",
+            }}
+          >
+            Expressive
+          </p>
+        </div>
+
+        {/* Bottom LED strip */}
+        <div
+          className="w-48 h-px mt-8"
+          style={{
+            background: "linear-gradient(to right, transparent, #BF953F, #FCF6BA, #D4AF37, #FCF6BA, #BF953F, transparent)",
+            boxShadow: "0 0 12px 4px rgba(212,175,55,0.6), 0 0 30px 8px rgba(212,175,55,0.25)",
+            animation: "ledPulse 1.8s ease-in-out infinite",
+          }}
+        />
+
+        {/* Subtitle */}
+        <p
+          className="mt-6 font-montserrat text-[9px] tracking-[0.5em] uppercase text-[#D4AF37]/60"
+          style={{ animation: "ledPulse 1.8s ease-in-out infinite" }}
+        >
+          Estética Facial &amp; Corporal
+        </p>
+      </div>
+
+      <style>{`
+        @keyframes ledPulse {
+          0%, 100% { opacity: 0.7; }
+          50% { opacity: 1; }
+        }
+      `}</style>
     </div>
   );
 }

@@ -14,6 +14,8 @@ export default function BookingSystem() {
   const [service, setService] = React.useState("");
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
+  const [bookedSlots, setBookedSlots] = React.useState<string[]>([]);
+  const [loadingSlots, setLoadingSlots] = React.useState(false);
 
   React.useEffect(() => {
     const handleSelectService = (e: any) => {
@@ -23,10 +25,57 @@ export default function BookingSystem() {
     return () => window.removeEventListener("selectService", handleSelectService);
   }, []);
 
-  const timeSlots = Array.from({ length: 9 }, (_, i) => {
-    const hour = i + 9;
-    return `${hour.toString().padStart(2, "0")}:00`;
-  });
+  // Fetch booked slots from Google Calendar when date changes
+  React.useEffect(() => {
+    if (!date) return;
+    const dateISO = date.toISOString().split("T")[0];
+    setLoadingSlots(true);
+    setSelectedTime(null);
+    fetch(`/api/availability?date=${dateISO}`)
+      .then((r) => r.json())
+      .then((data) => setBookedSlots(data.bookedSlots || []))
+      .catch(() => setBookedSlots([]))
+      .finally(() => setLoadingSlots(false));
+  }, [date]);
+
+  const availableTimeSlots = React.useMemo(() => {
+    if (!date) return [];
+
+    const dayOfWeek = date.getDay(); // 0=Sun, 1=Mon, ..., 6=Sat
+
+    // Generate base slots based on day
+    let slots: string[] = [];
+    if (dayOfWeek >= 1 && dayOfWeek <= 5) {
+      // Monday–Friday: 9 AM to 5 PM (slots: 9, 10, 11, 12, 13, 14, 15, 16, 17)
+      slots = Array.from({ length: 9 }, (_, i) => {
+        const hour = i + 9;
+        return `${String(hour).padStart(2, "0")}:00`;
+      });
+    } else if (dayOfWeek === 6) {
+      // Saturday: 10 AM to 12 PM (last slot starts at 12, ends at 1)
+      slots = ["10:00", "11:00", "12:00"];
+    } else {
+      // Sunday: no slots
+      return [];
+    }
+
+    const today = new Date();
+    const isToday =
+      date.getDate() === today.getDate() &&
+      date.getMonth() === today.getMonth() &&
+      date.getFullYear() === today.getFullYear();
+
+    // Filter past hours if today
+    if (isToday) {
+      const currentHour = today.getHours();
+      slots = slots.filter((slot) => parseInt(slot.split(":")[0], 10) > currentHour);
+    }
+
+    // Filter already booked slots
+    slots = slots.filter((slot) => !bookedSlots.includes(slot));
+
+    return slots;
+  }, [date, bookedSlots]);
 
   const bookedDates = [
     new Date(2025, 5, 20),
@@ -146,8 +195,8 @@ export default function BookingSystem() {
                   today.setHours(0, 0, 0, 0);
                   const currentDay = new Date(day);
                   currentDay.setHours(0, 0, 0, 0);
-                  
-                  return currentDay < today || bookedDates.some(d => d.toDateString() === day.toDateString());
+                  const isSunday = day.getDay() === 0;
+                  return currentDay < today || isSunday;
                 }}
               />
             </div>
@@ -155,7 +204,11 @@ export default function BookingSystem() {
             <div className="md:col-span-4 bg-gray-50/50 p-6 md:p-10">
               <h3 className="font-montserrat text-xs uppercase tracking-widest text-gray-400 mb-6 font-bold text-center">Horarios Disponibles</h3>
               <div className="grid grid-cols-2 md:grid-cols-1 gap-3 max-h-[300px] overflow-y-auto pr-2">
-                {timeSlots.map((time) => (
+                {loadingSlots ? (
+                  <div className="col-span-2 text-center py-8 text-sm text-gray-400 font-montserrat">
+                    Verificando disponibilidad...
+                  </div>
+                ) : availableTimeSlots.length > 0 ? availableTimeSlots.map((time) => (
                   <Button
                     key={time}
                     variant={selectedTime === time ? "default" : "outline"}
@@ -166,7 +219,13 @@ export default function BookingSystem() {
                   >
                     {time}
                   </Button>
-                ))}
+                )) : (
+                  <div className="col-span-2 text-center py-8 text-sm text-gray-500 font-montserrat">
+                    {date?.getDay() === 0
+                      ? "No atendemos los domingos."
+                      : "No hay horarios disponibles para este día."}
+                  </div>
+                )}
               </div>
             </div>
           </div>
