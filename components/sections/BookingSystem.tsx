@@ -26,9 +26,17 @@ export default function BookingSystem() {
   }, []);
 
   // Fetch booked slots from Google Calendar when date changes
+  // Helper: fecha local en formato YYYY-MM-DD (sin conversión a UTC)
+  const toLocalISO = (d: Date) => {
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    return `${y}-${m}-${day}`;
+  };
+
   React.useEffect(() => {
     if (!date) return;
-    const dateISO = date.toISOString().split("T")[0];
+    const dateISO = toLocalISO(date); // local, sin desfase UTC
     setLoadingSlots(true);
     setSelectedTime(null);
     fetch(`/api/availability?date=${dateISO}`)
@@ -96,7 +104,7 @@ export default function BookingSystem() {
           email,
           service,
           date: date.toLocaleDateString("es-ES", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }),
-          dateISO: date.toISOString().split("T")[0],
+          dateISO: toLocalISO(date), // local, sin desfase UTC
           time: selectedTime,
         }),
       });

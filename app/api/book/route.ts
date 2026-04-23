@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 import { google } from "googleapis";
 
 async function createCalendarEvent(
@@ -163,36 +163,37 @@ export async function POST(req: Request) {
     }
 
     const adminEmail = process.env.ADMIN_EMAIL || "estetica.expressiveperu@gmail.com";
-    const resendApiKey = process.env.RESEND_API_KEY;
-    const resend = resendApiKey ? new Resend(resendApiKey) : null;
-    // onboarding@resend.dev solo puede enviar al email del dueño de la cuenta de Resend.
-    // Para enviar al cliente necesitamos un dominio verificado en Resend.
-    // Por ahora: enviamos TODO al admin y le ponemos el reply-to del cliente.
-    const fromEmail = "Expressive <onboarding@resend.dev>";
+    const gmailUser = process.env.GMAIL_USER || adminEmail;
+    const gmailPass = process.env.GMAIL_APP_PASSWORD;
+
+    // Crear transporter de Gmail (funciona con App Password de Google)
+    const transporter = gmailPass
+      ? nodemailer.createTransport({
+          service: "gmail",
+          auth: { user: gmailUser, pass: gmailPass },
+        })
+      : null;
 
     const [calendarResult, clientEmailResult, adminEmailResult] = await Promise.allSettled([
       // 1. Crear evento en Google Calendar
       dateISO ? createCalendarEvent(name, email, service, dateISO, time) : Promise.resolve(null),
 
-      // 2. Confirmación al CLIENTE (su correo personal)
-      //    Resend plan gratuito sin dominio verificado solo permite enviar al dueño de la cuenta.
-      //    Solución: enviamos la confirmación del cliente al adminEmail con reply-to del cliente.
-      //    Cuando tengas dominio verificado en Resend, cambia to: [email] y elimina el replyTo.
-      email && resend
-        ? resend.emails.send({
-            from: fromEmail,
-            to: [adminEmail], // <-- Temporalmente al admin hasta tener dominio verificado
-            replyTo: email,   // <-- El admin puede responderle al cliente directamente
-            subject: `✨ Confirmación de cita para ${name} — ${date} ${time}`,
+      // 2. Confirmación directa al CLIENTE (cualquier email)
+      email && transporter
+        ? transporter.sendMail({
+            from: `"Expressive Estética" <${gmailUser}>`,
+            to: email,
+            subject: `✨ Tu cita en Expressive está confirmada — ${date} ${time}`,
             html: clientEmailHtml(name, service, date, time),
           })
         : Promise.resolve(null),
 
       // 3. Notificación interna al admin (nueva reserva)
-      adminEmail && resend
-        ? resend.emails.send({
-            from: fromEmail,
-            to: [adminEmail],
+      transporter
+        ? transporter.sendMail({
+            from: `"Expressive Estética" <${gmailUser}>`,
+            to: adminEmail,
+            replyTo: email || undefined,
             subject: `🗓️ Nueva reserva: ${service} — ${name} · ${date} ${time}`,
             html: adminEmailHtml(name, email, service, date, time),
           })
