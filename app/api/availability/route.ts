@@ -71,8 +71,11 @@ export async function GET(req: Request) {
     console.log(`[availability v4] Date: ${date} | Total events: ${events.length} | Booked slots: ${JSON.stringify(bookedSlots)}`);
 
     return NextResponse.json({ bookedSlots, _version: "v4", _total: events.length });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Availability check error:", error);
-    return NextResponse.json({ bookedSlots: [] });
+    return NextResponse.json({ 
+      bookedSlots: [], 
+      _error: error.message || String(error) 
+    });
   }
 }
