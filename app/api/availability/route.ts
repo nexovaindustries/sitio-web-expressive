@@ -58,15 +58,12 @@ export async function GET(req: Request) {
       .map((event) => {
         const start = event.start!.dateTime!;
 
-        // Convert to Lima timezone (UTC-5, Peru never uses DST)
-        const d = new Date(start);
-        const limaHour = new Intl.DateTimeFormat("en-US", {
-          timeZone: "America/Lima",
-          hour: "2-digit",
-          hour12: false,
-        }).format(d);
-
-        const hour = parseInt(limaHour, 10);
+        // Google returns times with Lima offset already in the string:
+        // e.g. "2026-04-23T10:00:00-05:00" → hour is 10
+        // Just parse it directly from the string — no timezone math needed
+        const timePart = start.split("T")[1]; // "10:00:00-05:00"
+        if (!timePart) return null;
+        const hour = parseInt(timePart.split(":")[0], 10);
         if (isNaN(hour)) return null;
 
         return `${String(hour).padStart(2, "0")}:00`;
