@@ -24,8 +24,9 @@ async function createCalendarEvent(
   const calendar = google.calendar({ version: "v3", auth });
 
   const [hour, minute] = time.split(":").map(Number);
-  const startDateTime = `${dateISO}T${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}:00`;
-  const endDateTime = `${dateISO}T${String(hour + 1).padStart(2, "0")}:${String(minute).padStart(2, "0")}:00`;
+  // Incluir el offset de Lima (-05:00) para que Google Calendar interprete la hora correctamente
+  const startDateTime = `${dateISO}T${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}:00-05:00`;
+  const endDateTime = `${dateISO}T${String(hour + 1).padStart(2, "0")}:${String(minute).padStart(2, "0")}:00-05:00`;
 
   const isValidEmail = (e: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
 
@@ -161,31 +162,38 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Faltan campos requeridos" }, { status: 400 });
     }
 
-    const adminEmail = process.env.ADMIN_EMAIL || "estetica.expressive@gmail.com";
+    const adminEmail = process.env.ADMIN_EMAIL || "estetica.expressiveperu@gmail.com";
     const resendApiKey = process.env.RESEND_API_KEY;
     const resend = resendApiKey ? new Resend(resendApiKey) : null;
+    // onboarding@resend.dev solo puede enviar al email del dueño de la cuenta de Resend.
+    // Para enviar al cliente necesitamos un dominio verificado en Resend.
+    // Por ahora: enviamos TODO al admin y le ponemos el reply-to del cliente.
     const fromEmail = "Expressive <onboarding@resend.dev>";
 
     const [calendarResult, clientEmailResult, adminEmailResult] = await Promise.allSettled([
       // 1. Crear evento en Google Calendar
       dateISO ? createCalendarEvent(name, email, service, dateISO, time) : Promise.resolve(null),
 
-      // 2. Email de confirmación al cliente
+      // 2. Confirmación al CLIENTE (su correo personal)
+      //    Resend plan gratuito sin dominio verificado solo permite enviar al dueño de la cuenta.
+      //    Solución: enviamos la confirmación del cliente al adminEmail con reply-to del cliente.
+      //    Cuando tengas dominio verificado en Resend, cambia to: [email] y elimina el replyTo.
       email && resend
         ? resend.emails.send({
             from: fromEmail,
-            to: [email],
-            subject: `✨ Tu cita en Expressive está confirmada — ${time}`,
+            to: [adminEmail], // <-- Temporalmente al admin hasta tener dominio verificado
+            replyTo: email,   // <-- El admin puede responderle al cliente directamente
+            subject: `✨ Confirmación de cita para ${name} — ${date} ${time}`,
             html: clientEmailHtml(name, service, date, time),
           })
         : Promise.resolve(null),
 
-      // 3. Notificación interna al admin
+      // 3. Notificación interna al admin (nueva reserva)
       adminEmail && resend
         ? resend.emails.send({
             from: fromEmail,
             to: [adminEmail],
-            subject: `Nueva reserva: ${service} — ${name} · ${date} ${time}`,
+            subject: `🗓️ Nueva reserva: ${service} — ${name} · ${date} ${time}`,
             html: adminEmailHtml(name, email, service, date, time),
           })
         : Promise.resolve(null),

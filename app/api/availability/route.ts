@@ -68,9 +68,9 @@ export async function GET(req: Request) {
       })
       .filter(Boolean) as string[];
 
-    console.log(`[availability] Date: ${date} | Events found: ${events.length} | Booked slots: ${JSON.stringify(bookedSlots)}`);
+    console.log(`[availability v4] Date: ${date} | Total events: ${events.length} | Booked slots: ${JSON.stringify(bookedSlots)}`);
 
-    return NextResponse.json({ bookedSlots });
+    return NextResponse.json({ bookedSlots, _version: "v4", _total: events.length });
   } catch (error) {
     console.error("Availability check error:", error);
     return NextResponse.json({ bookedSlots: [] });
