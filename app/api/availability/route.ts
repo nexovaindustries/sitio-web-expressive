@@ -26,6 +26,7 @@ export async function GET(req: Request) {
 
     const calendar = google.calendar({ version: "v3", auth });
 
+    // Query the full day in Lima timezone (UTC-5)
     const timeMin = `${date}T00:00:00-05:00`;
     const timeMax = `${date}T23:59:59-05:00`;
 
@@ -39,16 +40,40 @@ export async function GET(req: Request) {
 
     const events = response.data.items || [];
 
-    // Extract booked start hours (format: "HH:00")
     const bookedSlots = events
+      .filter((event) => {
+        // Skip all-day events (they have `start.date` not `start.dateTime`)
+        if (!event.start?.dateTime) return false;
+
+        // Skip very long events (Google Booking availability blocks span many hours)
+        const startMs = new Date(event.start.dateTime).getTime();
+        const endMs = event.end?.dateTime
+          ? new Date(event.end.dateTime).getTime()
+          : startMs;
+        const durationHours = (endMs - startMs) / (1000 * 60 * 60);
+        if (durationHours > 2) return false; // skip blocks longer than 2h
+
+        return true;
+      })
       .map((event) => {
-        const start = event.start?.dateTime;
-        if (!start) return null;
+        const start = event.start!.dateTime!;
+
+        // Convert to Lima timezone (UTC-5, Peru never uses DST)
         const d = new Date(start);
-        const hour = d.getHours();
+        const limaHour = new Intl.DateTimeFormat("en-US", {
+          timeZone: "America/Lima",
+          hour: "2-digit",
+          hour12: false,
+        }).format(d);
+
+        const hour = parseInt(limaHour, 10);
+        if (isNaN(hour)) return null;
+
         return `${String(hour).padStart(2, "0")}:00`;
       })
       .filter(Boolean) as string[];
+
+    console.log(`[availability] Date: ${date} | Events found: ${events.length} | Booked slots: ${JSON.stringify(bookedSlots)}`);
 
     return NextResponse.json({ bookedSlots });
   } catch (error) {
