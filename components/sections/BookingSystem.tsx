@@ -52,8 +52,8 @@ export default function BookingSystem() {
         return `${String(hour).padStart(2, "0")}:00`;
       });
     } else if (dayOfWeek === 6) {
-      // Saturday: 10 AM to 12 PM (last slot starts at 12, ends at 1)
-      slots = ["10:00", "11:00", "12:00"];
+      // Saturday: 10 AM to 1 PM (last slot starts at 13, ends at 14)
+      slots = ["10:00", "11:00", "12:00", "13:00"];
     } else {
       // Sunday: no slots
       return [];
