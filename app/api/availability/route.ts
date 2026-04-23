@@ -45,13 +45,11 @@ export async function GET(req: Request) {
         // Skip all-day events (they have `start.date` not `start.dateTime`)
         if (!event.start?.dateTime) return false;
 
-        // Skip very long events (Google Booking availability blocks span many hours)
-        const startMs = new Date(event.start.dateTime).getTime();
-        const endMs = event.end?.dateTime
-          ? new Date(event.end.dateTime).getTime()
-          : startMs;
-        const durationHours = (endMs - startMs) / (1000 * 60 * 60);
-        if (durationHours > 2) return false; // skip blocks longer than 2h
+        // Only count events created by our booking system.
+        // Our events always include "Cliente:" in the description.
+        // Google Booking availability blocks (Reservas Expressive) do NOT have this.
+        const description = event.description || "";
+        if (!description.includes("Cliente:")) return false;
 
         return true;
       })
