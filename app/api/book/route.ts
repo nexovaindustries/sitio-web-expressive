@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 import { google } from "googleapis";
 
 async function createCalendarEvent(
@@ -24,9 +24,8 @@ async function createCalendarEvent(
   const calendar = google.calendar({ version: "v3", auth });
 
   const [hour, minute] = time.split(":").map(Number);
-  // Incluir el offset de Lima (-05:00) para que Google Calendar interprete la hora correctamente
-  const startDateTime = `${dateISO}T${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}:00-05:00`;
-  const endDateTime = `${dateISO}T${String(hour + 1).padStart(2, "0")}:${String(minute).padStart(2, "0")}:00-05:00`;
+  const startDateTime = `${dateISO}T${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}:00`;
+  const endDateTime = `${dateISO}T${String(hour + 1).padStart(2, "0")}:${String(minute).padStart(2, "0")}:00`;
 
   const isValidEmail = (e: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
 
@@ -163,39 +162,21 @@ export async function POST(req: Request) {
     }
 
     const adminEmail = process.env.ADMIN_EMAIL || "estetica.expressiveperu@gmail.com";
-    const gmailUser = process.env.GMAIL_USER || adminEmail;
-    const gmailPass = process.env.GMAIL_APP_PASSWORD;
+    const resendApiKey = process.env.RESEND_API_KEY;
+    const resend = resendApiKey ? new Resend(resendApiKey) : null;
+    const fromEmail = "Expressive <onboarding@resend.dev>";
 
-    // Crear transporter de Gmail (funciona con App Password de Google)
-    const transporter = gmailPass
-      ? nodemailer.createTransport({
-          service: "gmail",
-          auth: { user: gmailUser, pass: gmailPass },
-        })
-      : null;
-
-    const [calendarResult, clientEmailResult, adminEmailResult] = await Promise.allSettled([
+    const [calendarResult, clientEmailResult] = await Promise.allSettled([
       // 1. Crear evento en Google Calendar
       dateISO ? createCalendarEvent(name, email, service, dateISO, time) : Promise.resolve(null),
 
-      // 2. Confirmación directa al CLIENTE (cualquier email)
-      email && transporter
-        ? transporter.sendMail({
-            from: `"Expressive Estética" <${gmailUser}>`,
-            to: email,
+      // 2. Confirmación directa al CLIENTE usando Resend
+      email && resend
+        ? resend.emails.send({
+            from: fromEmail,
+            to: [email], // <- Como solicitaste, solo envía al cliente
             subject: `✨ Tu cita en Expressive está confirmada — ${date} ${time}`,
             html: clientEmailHtml(name, service, date, time),
-          })
-        : Promise.resolve(null),
-
-      // 3. Notificación interna al admin (nueva reserva)
-      transporter
-        ? transporter.sendMail({
-            from: `"Expressive Estética" <${gmailUser}>`,
-            to: adminEmail,
-            replyTo: email || undefined,
-            subject: `🗓️ Nueva reserva: ${service} — ${name} · ${date} ${time}`,
-            html: adminEmailHtml(name, email, service, date, time),
           })
         : Promise.resolve(null),
     ]);
@@ -205,9 +186,6 @@ export async function POST(req: Request) {
     }
     if (clientEmailResult.status === "rejected") {
       console.error("Client email error:", clientEmailResult.reason);
-    }
-    if (adminEmailResult.status === "rejected") {
-      console.error("Admin email error:", adminEmailResult.reason);
     }
 
     return NextResponse.json({
