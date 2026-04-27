@@ -12,7 +12,7 @@ export async function GET(req: Request) {
   }
 
   const serviceAccountEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
-  const privateKey = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n");
+  const privateKey = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n").replace(/"/g, "").trim();
   const calendarId = process.env.GOOGLE_CALENDAR_ID;
 
   if (!serviceAccountEmail || !privateKey || !calendarId) {
