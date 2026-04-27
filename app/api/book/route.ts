@@ -197,9 +197,10 @@ export async function POST(req: Request) {
       message: "Reserva procesada",
       calendar: calendarResult.status === "fulfilled" ? "ok" : "error",
       email: clientEmailResult.status === "fulfilled" ? "ok" : "error",
+      _calendarError: calendarResult.status === "rejected" ? String(calendarResult.reason) : null
     });
   } catch (error) {
     console.error("Booking error:", error);
-    return NextResponse.json({ error: "Error interno del servidor" }, { status: 500 });
+    return NextResponse.json({ error: "Error interno del servidor", _error: String(error) }, { status: 500 });
   }
 }
