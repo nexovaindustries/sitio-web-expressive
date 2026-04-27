@@ -10,7 +10,12 @@ async function createCalendarEvent(
   time: string
 ) {
   const serviceAccountEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
-  const privateKey = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n").replace(/"/g, "").trim();
+  let privateKey = process.env.GOOGLE_PRIVATE_KEY || "";
+  if (!privateKey.includes("BEGIN PRIVATE KEY")) {
+    privateKey = Buffer.from(privateKey, 'base64').toString('utf-8');
+  } else {
+    privateKey = privateKey.replace(/\\n/g, "\n").replace(/"/g, "").trim();
+  }
   const calendarId = process.env.GOOGLE_CALENDAR_ID;
 
   if (!serviceAccountEmail || !privateKey || !calendarId) return null;
