@@ -1,6 +1,7 @@
 "use client";
 
 import { MeshGradient } from "@paper-design/shaders-react";
+import OrnamentalE from "@/components/ui/OrnamentalE";
 
 export default function Hero() {
   return (
@@ -99,7 +100,7 @@ export default function Hero() {
         <h1 className="font-playfair text-5xl sm:text-6xl md:text-[8rem] leading-[1] tracking-[-0.02em] text-white mb-6">
           <span className="block overflow-hidden pb-4">
             <span className="block reveal">
-              <span className="font-cinzel">E</span>xpressive
+              <OrnamentalE />xpressive
             </span>
           </span>
         </h1>
