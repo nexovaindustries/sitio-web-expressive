@@ -2,29 +2,30 @@
 
 export default function OrnamentalE({ className = "" }: { className?: string }) {
   return (
-    <span className={`relative inline-block font-cinzel ${className}`}>
+    <span className={`relative inline-block font-playfair ${className}`}>
       E
+      {/* Doble voluta calligráfica en la base de la E, igual al logo */}
       <svg
         aria-hidden="true"
-        viewBox="0 0 25 100"
+        viewBox="-15 -2 85 52"
         fill="none"
         stroke="currentColor"
         strokeLinecap="round"
-        strokeWidth="3"
+        strokeWidth="2.2"
         style={{
           position: "absolute",
-          left: "-0.08em",
-          top: 0,
-          height: "100%",
-          width: "0.22em",
+          left: "-0.05em",
+          top: "55%",
+          height: "48%",
+          width: "0.75em",
           overflow: "visible",
           pointerEvents: "none",
         }}
       >
-        {/* Curl superior: sale del trazo superior de la E, curva arriba-izquierda y regresa */}
-        <path d="M 22,10 C 12,3 2,-3 0,6 C -2,13 12,16 22,14" />
-        {/* Curl inferior: espejo, sale abajo-izquierda y regresa */}
-        <path d="M 22,90 C 12,97 2,103 0,94 C -2,87 12,84 22,86" />
+        {/* Primer arco: sale de la base de la E, curva hacia la izquierda */}
+        <path d="M 15,0 C 5,3 -8,8 -10,18 C -12,26 -3,30 10,28" />
+        {/* Segundo arco: continúa desde el extremo izquierdo, curva hacia la derecha */}
+        <path d="M 0,24 C -6,32 0,44 12,48 C 28,52 50,46 68,36" />
       </svg>
     </span>
   );
