@@ -128,15 +128,6 @@
 .animate-float          { animation: float          10s ease-in-out infinite; }
 .animate-float-delayed  { animation: float-delayed  13s ease-in-out infinite; }
 
-/* ── Filtro CSS → logo dorado ────────────────────────── */
-.logo-gold {
-  filter: brightness(0) saturate(100%) invert(74%) sepia(44%) saturate(574%) hue-rotate(3deg) brightness(95%);
-  transition: filter 0.4s ease;
-}
-.logo-gold:hover {
-  filter: brightness(0) saturate(100%) invert(74%) sepia(44%) saturate(574%) hue-rotate(3deg) brightness(115%);
-}
-
 /* ── Shimmer dorado (hover en cards) ────────────────── */
 @keyframes gold-shimmer {
   0%   { background-position: -200% center; }

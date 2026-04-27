@@ -26,7 +26,7 @@ export default function Navbar() {
                 alt="Expressive"
                 width={200}
                 height={50}
-                className="h-10 md:h-12 w-auto object-contain logo-gold"
+                className="h-10 md:h-12 w-auto object-contain"
               />
             </Link>
           </div>
