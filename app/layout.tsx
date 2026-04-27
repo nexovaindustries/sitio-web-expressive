@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Montserrat, Cormorant_Garamond } from "next/font/google";
+import { Playfair_Display, Montserrat, Cormorant_Garamond, Cinzel_Decorative } from "next/font/google";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -19,6 +19,12 @@ const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
 });
 
+const cinzel = Cinzel_Decorative({
+  subsets: ["latin"],
+  weight: ["400", "700", "900"],
+  variable: "--font-cinzel",
+});
+
 export const metadata: Metadata = {
   title: "Expressive - Estética Facial & Corporal",
   description: "Tratamientos de estética facial y corporal de alta gama. Belleza curada, esculpida con arte.",
@@ -36,7 +42,7 @@ export default function RootLayout({
         <style>{`* { cursor: none !important; }`}</style>
       </head>
       <body
-        className={`${playfair.variable} ${montserrat.variable} ${cormorant.variable} font-body antialiased selection:bg-gold selection:text-white`}
+        className={`${playfair.variable} ${montserrat.variable} ${cormorant.variable} ${cinzel.variable} font-body antialiased selection:bg-gold selection:text-white`}
       >
         {children}
       </body>
