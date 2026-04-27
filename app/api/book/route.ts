@@ -42,7 +42,6 @@ async function createCalendarEvent(
       description: `Cliente: ${name}\nEmail: ${email || "No proporcionado"}\nServicio: ${service}`,
       start: { dateTime: startDateTime, timeZone: "America/Lima" },
       end: { dateTime: endDateTime, timeZone: "America/Lima" },
-      attendees: email && isValidEmail(email) ? [{ email }] : [],
       reminders: {
         useDefault: false,
         overrides: [
