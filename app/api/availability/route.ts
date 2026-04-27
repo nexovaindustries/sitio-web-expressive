@@ -75,9 +75,18 @@ export async function GET(req: Request) {
     return NextResponse.json({ bookedSlots, _version: "v4", _total: events.length });
   } catch (error) {
     console.error("Availability check error:", error);
+    const serviceAccountEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
+    const rawKey = process.env.GOOGLE_PRIVATE_KEY || "";
+    const privateKey = rawKey.replace(/\\n/g, "\n").replace(/"/g, "").trim();
+    
     return NextResponse.json({ 
       bookedSlots: [], 
-      _error: (error as Error).message || String(error) 
+      _error: (error as Error).message || String(error),
+      _debug: {
+        keyLength: privateKey.length,
+        keyStart: privateKey.substring(0, 50),
+        hasCarriageReturn: privateKey.includes("\r")
+      }
     });
   }
 }
