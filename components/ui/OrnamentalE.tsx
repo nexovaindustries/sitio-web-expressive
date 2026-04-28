@@ -6,9 +6,10 @@ export default function OrnamentalE({ className = "" }: { className?: string }) 
       className={`font-pinyon ${className}`}
       style={{
         display: "inline-block",
-        transform: "skewX(-12deg)",
-        WebkitTextStroke: "0.5px currentColor",
-        marginRight: "0.2em",
+        transform: "rotate(-8deg)",
+        WebkitTextStroke: "1.5px currentColor",
+        marginRight: "-0.05em",
+        paddingRight: "0.05em",
       }}
     >
       E
