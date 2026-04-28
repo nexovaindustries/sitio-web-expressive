@@ -93,6 +93,7 @@
 .font-montserrat { font-family: var(--font-montserrat), sans-serif; }
 .font-cormorant  { font-family: var(--font-cormorant), serif; }
 .font-cinzel     { font-family: var(--font-cinzel), serif; }
+.font-pinyon     { font-family: var(--font-pinyon), cursive; }
 
 /* ── Gradiente dorado en texto ───────────────────────── */
 .text-gradient-gold {
