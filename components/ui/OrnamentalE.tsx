@@ -1,18 +1,32 @@
 "use client";
 
+import Image from "next/image";
+
 export default function OrnamentalE({ className = "" }: { className?: string }) {
   return (
     <span
-      className={`font-pinyon ${className}`}
+      className={className}
       style={{
         display: "inline-block",
-        transform: "rotate(-8deg)",
-        WebkitTextStroke: "1.5px currentColor",
-        marginRight: "-0.05em",
-        paddingRight: "0.05em",
+        verticalAlign: "baseline",
+        position: "relative",
+        width: "1.25em",
+        height: "1.25em",
+        marginRight: "-0.12em",
+        marginBottom: "-0.25em",
       }}
     >
-      E
+      <Image
+        src="/ornamental-e-transparent.png"
+        alt="E"
+        width={200}
+        height={200}
+        className="w-full h-full object-contain"
+        style={{
+          filter: "brightness(1.15)",
+        }}
+        priority
+      />
     </span>
   );
 }
