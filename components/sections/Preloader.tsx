@@ -7,6 +7,11 @@ export default function Preloader() {
   const [phase, setPhase] = useState<"glow" | "fade">("glow");
 
   useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
     // After 1.8s start fade out
     const fadeTimer = setTimeout(() => setPhase("fade"), 1800);
     // Remove preloader after fade completes
