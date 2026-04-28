@@ -7,27 +7,27 @@ export default function OrnamentalE({ className = "" }: { className?: string }) 
       {/*
         Voluta calligráfica:
         - Sale de la esquina inferior-izquierda de la E
-        - Baja, da un loop hacia la izquierda
-        - Se extiende en arco largo hacia la derecha hasta debajo de la "r"
+        - Hace un loop pronunciado hacia abajo-izquierda
+        - Se extiende en arco largo hasta debajo de la "r"
       */}
       <svg
         aria-hidden="true"
-        viewBox="0 0 280 140"
+        viewBox="0 0 360 150"
         fill="none"
         stroke="currentColor"
         strokeLinecap="round"
-        strokeWidth="2"
+        strokeWidth="2.5"
         style={{
           position: "absolute",
           left: 0,
           top: 0,
           height: "100%",
-          width: "2.5em",
+          width: "3.2em",
           overflow: "visible",
           pointerEvents: "none",
         }}
       >
-        <path d="M 5,98 C -15,108 -25,120 -10,130 C 2,140 25,136 255,120" />
+        <path d="M 5,98 C -18,110 -32,126 -12,136 C 6,146 38,140 340,124" />
       </svg>
     </span>
   );
