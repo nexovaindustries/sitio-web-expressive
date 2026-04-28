@@ -35,68 +35,48 @@ export default function Preloader() {
       {/* LED horizontal glow strip behind the logo */}
       <div className="relative flex flex-col items-center">
 
-        {/* Top LED strip */}
-        <div
-          className="w-48 h-px mb-8"
-          style={{
-            background: "linear-gradient(to right, transparent, #BF953F, #FCF6BA, #D4AF37, #FCF6BA, #BF953F, transparent)",
-            boxShadow: "0 0 12px 4px rgba(212,175,55,0.6), 0 0 30px 8px rgba(212,175,55,0.25)",
-            animation: "ledPulse 1.8s ease-in-out infinite",
-          }}
-        />
-
-        {/* Logo text with LED glow effect */}
-        <div className="relative">
-          {/* Glow layer behind text */}
-          <p
-            className="font-playfair text-4xl tracking-[0.35em] uppercase font-light absolute inset-0 flex items-center justify-center select-none"
+        <div className="relative w-32 h-32 mb-6">
+          {/* Dim background logo */}
+          <img
+            src="/logo-icon.png"
+            alt="Expressive Logo"
+            className="absolute inset-0 w-full h-full object-contain opacity-20 grayscale"
+          />
+          {/* Illuminated logo that fills from bottom to top */}
+          <img
+            src="/logo-icon.png"
+            alt="Expressive Logo"
+            className="absolute inset-0 w-full h-full object-contain"
             style={{
-              color: "#D4AF37",
-              filter: "blur(12px)",
-              opacity: 0.7,
-              animation: "ledPulse 1.8s ease-in-out infinite",
+              animation: "fillUp 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards",
+              filter: "drop-shadow(0 0 12px rgba(212,175,55,0.6))",
             }}
-          >
-            Expressive
-          </p>
-          {/* Crisp text on top */}
-          <p
-            className="font-playfair text-4xl tracking-[0.35em] uppercase font-light relative"
-            style={{
-              background: "linear-gradient(135deg, #BF953F 0%, #FCF6BA 40%, #D4AF37 60%, #AA771C 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              animation: "ledPulse 1.8s ease-in-out infinite",
-            }}
-          >
-            Expressive
-          </p>
+          />
         </div>
-
-        {/* Bottom LED strip */}
-        <div
-          className="w-48 h-px mt-8"
-          style={{
-            background: "linear-gradient(to right, transparent, #BF953F, #FCF6BA, #D4AF37, #FCF6BA, #BF953F, transparent)",
-            boxShadow: "0 0 12px 4px rgba(212,175,55,0.6), 0 0 30px 8px rgba(212,175,55,0.25)",
-            animation: "ledPulse 1.8s ease-in-out infinite",
-          }}
-        />
 
         {/* Subtitle */}
         <p
-          className="mt-6 font-montserrat text-[9px] tracking-[0.5em] uppercase text-[#D4AF37]/60"
-          style={{ animation: "ledPulse 1.8s ease-in-out infinite" }}
+          className="font-montserrat text-[9px] tracking-[0.5em] uppercase text-[#D4AF37]/80"
+          style={{ animation: "fadeIn 1s ease-in-out forwards 0.5s", opacity: 0 }}
         >
           Estética Facial &amp; Corporal
         </p>
       </div>
 
       <style>{`
-        @keyframes ledPulse {
-          0%, 100% { opacity: 0.7; }
-          50% { opacity: 1; }
+        @keyframes fillUp {
+          0% {
+            clip-path: inset(100% 0 0 0);
+            opacity: 0.8;
+          }
+          100% {
+            clip-path: inset(0 0 0 0);
+            opacity: 1;
+          }
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
         }
       `}</style>
     </div>
