@@ -109,7 +109,7 @@ function clientEmailHtml(name: string, service: string, date: string, time: stri
           <table width="100%" cellpadding="0" cellspacing="0" style="background:rgba(212,175,55,0.06);border:1px solid rgba(212,175,55,0.2);border-radius:8px;padding:16px 20px;">
             <tr><td>
               <p style="margin:0 0 4px;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#D4AF37;">Dónde encontrarnos</p>
-              <p style="margin:0;font-size:13px;color:#ccc;">Pasaje Santa Cruz 205, Cayma · Arequipa, Perú</p>
+              <p style="margin:0;font-size:13px;color:#ccc;">Pasaje Santa Cruz 205, Int. 305, Cayma · Arequipa, Perú</p>
               <p style="margin:4px 0 0;font-size:13px;color:#ccc;">📞 951 108 796</p>
             </td></tr>
           </table>

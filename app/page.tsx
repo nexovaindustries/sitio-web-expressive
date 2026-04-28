@@ -85,7 +85,7 @@ export default function Home() {
             <div>
               <h4 className="font-montserrat text-[9px] uppercase tracking-[0.4em] text-[#D4AF37]/80 mb-6 font-bold">Contacto</h4>
               <ul className="font-montserrat text-xs space-y-4 text-gray-500">
-                <li>Pasaje Santa Cruz 205, Cayma</li>
+                <li>Pasaje Santa Cruz 205, Int. 305, Cayma</li>
                 <li>951 108 796</li>
                 <li>Arequipa, Perú</li>
               </ul>

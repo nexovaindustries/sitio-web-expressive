@@ -143,7 +143,7 @@ export function Location() {
               <span className="material-symbols-outlined text-gold">location_on</span>
               <div>
                 <p className="font-montserrat text-sm font-bold">Arequipa, Cayma</p>
-                <p className="font-montserrat text-sm text-gray-500">Pasaje Santa Cruz 205</p>
+                <p className="font-montserrat text-sm text-gray-500">Pasaje Santa Cruz 205, Int. 305</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
