@@ -1,33 +1,29 @@
 "use client";
 
-import Image from "next/image";
-
 export default function OrnamentalE({ className = "" }: { className?: string }) {
   return (
     <span
       className={className}
       style={{
         display: "inline-block",
-        verticalAlign: "top",
         position: "relative",
-        width: "2.0em",
-        height: "1.0em",
-        marginRight: "-1.1em",
+        width: "0.6em",
+        verticalAlign: "top",
         zIndex: 0,
       }}
     >
-      <Image
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
         src="/ornamental-e-transparent.png"
         alt="E"
-        width={1102}
-        height={604}
         style={{
-          width: "100%",
-          height: "100%",
-          objectFit: "contain",
-          objectPosition: "left top",
+          position: "absolute",
+          top: 0,
+          left: 0,
+          height: "0.9em",
+          width: "auto",
+          filter: "brightness(0) invert(1)",
         }}
-        priority
       />
     </span>
   );
