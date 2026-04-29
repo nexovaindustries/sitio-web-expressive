@@ -1,8 +1,9 @@
 "use client";
 
-// The PNG is 1102×604. The E body occupies roughly the top 55% / left 37% of the image.
-// The swash tail lives in the bottom 40%, sweeping right — so we scale the image tall
-// enough that the swash falls BELOW the text baseline rather than crossing through it.
+// PNG 1102×604. E body = top 51% / left 37% of image. Swash = bottom 40%, sweeping right.
+// Height 1.3em → E body cap ≈ 0.67em, matching Playfair Display's cap height.
+// top:0.08em nudges the image down so the E body aligns with the text cap line,
+// and the swash falls entirely below the baseline.
 export default function OrnamentalE({ className = "" }: { className?: string }) {
   return (
     <span
@@ -10,9 +11,7 @@ export default function OrnamentalE({ className = "" }: { className?: string }) 
       style={{
         display: "inline-block",
         position: "relative",
-        // Reserve the width of the E body + loop; xpressive starts right after
-        width: "1em",
-        // Container height = visible cap height; swash overflows downward
+        width: "0.9em",
         height: "0.9em",
         verticalAlign: "top",
         overflow: "visible",
@@ -22,11 +21,10 @@ export default function OrnamentalE({ className = "" }: { className?: string }) 
         aria-hidden="true"
         style={{
           position: "absolute",
-          top: 0,
+          top: "0.08em",
           left: 0,
-          // Scale tall so the swash (bottom 40% of image) falls below the text line
-          height: "1.6em",
-          width: `${1.6 * (1102 / 604)}em`, // ≈ 2.92em, preserving aspect ratio
+          height: "1.3em",
+          width: `${1.3 * (1102 / 604)}em`,
           backgroundImage: "url('/ornamental-e-transparent.png')",
           backgroundSize: "100% 100%",
           backgroundRepeat: "no-repeat",
