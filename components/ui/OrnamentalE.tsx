@@ -10,9 +10,9 @@ export default function OrnamentalE({ className = "" }: { className?: string }) 
         display: "inline-block",
         verticalAlign: "top",
         position: "relative",
-        width: "2.4em",
-        height: "1.2em",
-        marginRight: "-1.75em",
+        width: "2.0em",
+        height: "1.0em",
+        marginRight: "-1.1em",
         zIndex: 0,
       }}
     >
