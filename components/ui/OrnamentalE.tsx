@@ -1,7 +1,5 @@
 "use client";
 
-import Image from "next/image";
-
 export default function OrnamentalE({ className = "" }: { className?: string }) {
   return (
     <span
@@ -10,25 +8,24 @@ export default function OrnamentalE({ className = "" }: { className?: string }) 
         display: "inline-block",
         position: "relative",
         width: "0.75em",
+        height: "0.9em",
         verticalAlign: "top",
-        zIndex: 0,
       }}
     >
-      <Image
-        src="/ornamental-e-transparent.png"
-        alt="E"
-        width={1102}
-        height={604}
+      <span
+        aria-hidden="true"
         style={{
           position: "absolute",
           top: 0,
           left: 0,
-          height: "0.9em",
           width: "1.64em",
+          height: "0.9em",
+          backgroundImage: "url('/ornamental-e-transparent.png')",
+          backgroundSize: "100% 100%",
+          backgroundRepeat: "no-repeat",
           filter: "brightness(0) invert(1)",
-          zIndex: 0,
+          zIndex: -1,
         }}
-        priority
       />
     </span>
   );
