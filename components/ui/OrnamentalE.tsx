@@ -1,5 +1,8 @@
 "use client";
 
+// The PNG is 1102×604. The E body occupies roughly the top 55% / left 37% of the image.
+// The swash tail lives in the bottom 40%, sweeping right — so we scale the image tall
+// enough that the swash falls BELOW the text baseline rather than crossing through it.
 export default function OrnamentalE({ className = "" }: { className?: string }) {
   return (
     <span
@@ -7,9 +10,12 @@ export default function OrnamentalE({ className = "" }: { className?: string }) 
       style={{
         display: "inline-block",
         position: "relative",
-        width: "0.75em",
+        // Reserve the width of the E body + loop; xpressive starts right after
+        width: "1em",
+        // Container height = visible cap height; swash overflows downward
         height: "0.9em",
         verticalAlign: "top",
+        overflow: "visible",
       }}
     >
       <span
@@ -18,8 +24,9 @@ export default function OrnamentalE({ className = "" }: { className?: string }) 
           position: "absolute",
           top: 0,
           left: 0,
-          width: "1.64em",
-          height: "0.9em",
+          // Scale tall so the swash (bottom 40% of image) falls below the text line
+          height: "1.6em",
+          width: `${1.6 * (1102 / 604)}em`, // ≈ 2.92em, preserving aspect ratio
           backgroundImage: "url('/ornamental-e-transparent.png')",
           backgroundSize: "100% 100%",
           backgroundRepeat: "no-repeat",
