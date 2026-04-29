@@ -26,6 +26,7 @@ export default function OrnamentalE({ className = "" }: { className?: string }) 
           height: "0.9em",
           width: "1.64em",
           filter: "brightness(0) invert(1)",
+          zIndex: 0,
         }}
         priority
       />

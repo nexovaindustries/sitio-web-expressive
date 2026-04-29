@@ -99,8 +99,8 @@ export default function Hero() {
 
         <h1 className="font-playfair text-5xl sm:text-6xl md:text-[8rem] leading-[1] tracking-[-0.02em] text-white mb-6">
           <span className="block pb-4">
-            <span className="block reveal">
-              <OrnamentalE /><span style={{ position: "relative", zIndex: 1 }}>xpressive</span>
+            <span className="block reveal" style={{ isolation: "isolate" }}>
+              <OrnamentalE /><span style={{ position: "relative", zIndex: 10 }}>xpressive</span>
             </span>
           </span>
         </h1>
