@@ -10,10 +10,12 @@ export default function OrnamentalE({ className = "" }: { className?: string }) 
         display: "inline-block",
         verticalAlign: "baseline",
         position: "relative",
-        width: "1.25em",
-        height: "1.25em",
-        marginRight: "-0.12em",
-        marginBottom: "-0.25em",
+        top: "0.4em",
+        width: "2.75em",
+        height: "1.5em",
+        marginRight: "-2.1em",
+        marginBottom: "-0.5em",
+        zIndex: 0,
       }}
     >
       <Image
