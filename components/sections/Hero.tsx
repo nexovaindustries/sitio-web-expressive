@@ -97,10 +97,10 @@ export default function Hero() {
           </div>
         </div>
 
-        <h1 className="font-playfair text-5xl sm:text-6xl md:text-[8rem] leading-[1] text-white mb-6">
-          <span className="block overflow-hidden pb-4">
-            <span className="block reveal uppercase" style={{ letterSpacing: "0.08em" }}>
-              <OrnamentalE />XPRESSIVE
+        <h1 className="font-playfair text-5xl sm:text-6xl md:text-[8rem] leading-[1] tracking-[-0.02em] text-white mb-6">
+          <span className="block pb-4">
+            <span className="block reveal">
+              <OrnamentalE />xpressive
             </span>
           </span>
         </h1>
