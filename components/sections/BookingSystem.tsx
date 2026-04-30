@@ -120,25 +120,38 @@ export default function BookingSystem() {
     }
   };
 
+  React.useEffect(() => {
+    if (isSuccess) {
+      const element = document.getElementById("booking");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+  }, [isSuccess]);
+
   if (isSuccess) {
     return (
-      <Card className="max-w-2xl mx-auto border-gold/30 bg-white">
-        <CardContent className="flex flex-col items-center justify-center py-20 text-center">
-          <CheckCircle2 className="w-16 h-16 text-gold mb-6" />
-          <h2 className="font-playfair text-3xl text-black mb-4">¡Cita Solicitada!</h2>
-          <p className="font-montserrat text-gray-500 max-w-sm">
-            Hemos recibido tu solicitud para el <span className="font-bold text-black">{date?.toLocaleDateString()}</span> a las <span className="font-bold text-black">{selectedTime}</span>. 
-            Te enviaremos un correo de confirmación pronto.
-          </p>
-          <Button 
-            variant="outline" 
-            className="mt-8 border-gold text-gold hover:bg-gold hover:text-white"
-            onClick={() => setIsSuccess(false)}
-          >
-            Reservar otra cita
-          </Button>
-        </CardContent>
-      </Card>
+      <section className="pt-10 pb-32 bg-black scroll-mt-14 relative overflow-hidden" id="booking">
+        <div className="max-w-2xl mx-auto px-6 relative z-10">
+          <Card className="border-gold/30 bg-white">
+            <CardContent className="flex flex-col items-center justify-center py-20 text-center">
+              <CheckCircle2 className="w-16 h-16 text-gold mb-6" />
+              <h2 className="font-playfair text-3xl text-black mb-4">¡Cita Solicitada!</h2>
+              <p className="font-montserrat text-gray-500 max-w-sm">
+                Hemos recibido tu solicitud para el <span className="font-bold text-black">{date?.toLocaleDateString()}</span> a las <span className="font-bold text-black">{selectedTime}</span>. 
+                Te enviaremos un correo de confirmación pronto.
+              </p>
+              <Button 
+                variant="outline" 
+                className="mt-8 border-gold text-gold hover:bg-gold hover:text-white"
+                onClick={() => setIsSuccess(false)}
+              >
+                Reservar otra cita
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
     );
   }
 
