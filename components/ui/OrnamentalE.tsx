@@ -25,7 +25,7 @@ export default function OrnamentalE({ className = "" }: { className?: string }) 
           left: "-0.15em",
           height: "1.5em",
           width: `${1.5 * (1102 / 604)}em`,
-          background: "linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)",
+          background: "linear-gradient(135deg, #8A6628 0%, #D4AF37 25%, #B38728 50%, #C5A028 75%, #7A5C1E 100%)",
           WebkitMaskImage: "url('/ornamental-e-transparent.png')",
           maskImage: "url('/ornamental-e-transparent.png')",
           WebkitMaskSize: "100% 100%",
