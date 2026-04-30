@@ -143,7 +143,7 @@ export default function BookingSystem() {
   }
 
   return (
-    <section className="pt-4 pb-32 bg-black scroll-mt-0 relative overflow-hidden" id="booking">
+    <section className="pt-20 pb-32 bg-black scroll-mt-20 relative overflow-hidden" id="booking">
 
       {/* Fondo negro geométrico dorado */}
       <div className="absolute inset-0 pointer-events-none">
