@@ -21,10 +21,10 @@ export default function OrnamentalE({ className = "" }: { className?: string }) 
         aria-hidden="true"
         style={{
           position: "absolute",
-          top: "0.08em",
+          top: "0.1em",
           left: 0,
-          height: "1.3em",
-          width: `${1.3 * (1102 / 604)}em`,
+          height: "1.5em",
+          width: `${1.5 * (1102 / 604)}em`,
           backgroundImage: "url('/ornamental-e-transparent.png')",
           backgroundSize: "100% 100%",
           backgroundRepeat: "no-repeat",

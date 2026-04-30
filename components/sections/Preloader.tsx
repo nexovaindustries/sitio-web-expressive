@@ -66,11 +66,11 @@ export default function Preloader() {
       <style>{`
         @keyframes fillUp {
           0% {
-            clip-path: inset(100% 0 0 0);
+            clip-path: inset(100% -20% -20% -20%);
             opacity: 0.8;
           }
           100% {
-            clip-path: inset(0 0 0 0);
+            clip-path: inset(-20% -20% -20% -20%);
             opacity: 1;
           }
         }
