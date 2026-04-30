@@ -38,18 +38,18 @@ export default function Preloader() {
         <div className="relative w-32 h-32 mb-6">
           {/* Dim background logo */}
           <img
-            src="/logo-icon.png"
+            src="/loader.png"
             alt="Expressive Logo"
-            className="absolute inset-0 w-full h-full object-contain opacity-20 grayscale"
+            className="absolute inset-0 w-full h-full object-contain opacity-10 blur-[1px]"
           />
           {/* Illuminated logo that fills from bottom to top */}
           <img
-            src="/logo-icon.png"
+            src="/loader.png"
             alt="Expressive Logo"
             className="absolute inset-0 w-full h-full object-contain"
             style={{
-              animation: "fillUp 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards",
-              filter: "drop-shadow(0 0 12px rgba(212,175,55,0.6))",
+              animation: "fillUp 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards",
+              filter: "drop-shadow(0 0 20px rgba(212,175,55,0.4))",
             }}
           />
         </div>
