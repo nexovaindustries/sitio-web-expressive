@@ -35,29 +35,38 @@ export default function Preloader() {
       {/* LED horizontal glow strip behind the logo */}
       <div className="relative flex flex-col items-center">
 
-        <div className="relative w-32 h-32 mb-6">
+        <div className="relative w-48 h-48 md:w-64 md:h-64 mb-10">
           {/* Dim background logo */}
           <img
             src="/loader.png"
             alt="Expressive Logo"
-            className="absolute inset-0 w-full h-full object-contain opacity-10 blur-[1px]"
+            className="absolute inset-0 w-full h-full object-contain opacity-5 blur-[2px]"
           />
-          {/* Illuminated logo that fills from bottom to top */}
-          <img
-            src="/loader.png"
-            alt="Expressive Logo"
-            className="absolute inset-0 w-full h-full object-contain"
-            style={{
-              animation: "fillUp 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards",
-              filter: "drop-shadow(0 0 20px rgba(212,175,55,0.4))",
-            }}
-          />
+          {/* Illuminated logo that fills from bottom to top with a beam effect */}
+          <div className="absolute inset-0 w-full h-full overflow-hidden">
+            <img
+              src="/loader.png"
+              alt="Expressive Logo"
+              className="absolute inset-0 w-full h-full object-contain"
+              style={{
+                animation: "fillUp 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards",
+                filter: "drop-shadow(0 0 30px rgba(212,175,55,0.8)) brightness(1.2)",
+              }}
+            />
+            {/* The "LED" beam effect moving up */}
+            <div 
+              className="absolute left-0 right-0 h-4 bg-white/40 blur-xl z-20"
+              style={{
+                animation: "beamUp 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards",
+              }}
+            />
+          </div>
         </div>
 
         {/* Subtitle */}
         <p
-          className="font-montserrat text-[9px] tracking-[0.5em] uppercase text-[#D4AF37]/80"
-          style={{ animation: "fadeIn 1s ease-in-out forwards 0.5s", opacity: 0 }}
+          className="font-montserrat text-[11px] tracking-[0.6em] uppercase text-[#D4AF37]"
+          style={{ animation: "fadeIn 1.2s ease-in-out forwards 0.8s", opacity: 0 }}
         >
           Estética Facial &amp; Corporal
         </p>
@@ -66,17 +75,31 @@ export default function Preloader() {
       <style>{`
         @keyframes fillUp {
           0% {
-            clip-path: inset(100% -20% -20% -20%);
-            opacity: 0.8;
+            clip-path: inset(100% 0% 0% 0%);
           }
           100% {
-            clip-path: inset(-20% -20% -20% -20%);
+            clip-path: inset(0% 0% 0% 0%);
+          }
+        }
+        @keyframes beamUp {
+          0% {
+            top: 100%;
+            opacity: 0;
+          }
+          10% {
             opacity: 1;
+          }
+          90% {
+            opacity: 1;
+          }
+          100% {
+            top: -10%;
+            opacity: 0;
           }
         }
         @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
         }
       `}</style>
     </div>
