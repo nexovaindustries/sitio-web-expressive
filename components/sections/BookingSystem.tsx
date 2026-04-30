@@ -221,9 +221,12 @@ export default function BookingSystem() {
                     key={time}
                     variant={selectedTime === time ? "default" : "outline"}
                     onClick={() => setSelectedTime(time)}
-                    className={`w-full py-6 font-montserrat text-xs tracking-widest transition-all duration-300 ${
-                      selectedTime === time ? "bg-black text-gold shadow-lg" : "hover:border-gold hover:text-gold"
+                    className={`w-full py-6 font-montserrat text-xs tracking-widest transition-all duration-300 border-none rounded-none ${
+                      selectedTime === time ? "text-black shadow-lg" : "hover:border-gold hover:text-gold"
                     }`}
+                    style={selectedTime === time ? {
+                      background: "linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)"
+                    } : {}}
                   >
                     {time}
                   </Button>
@@ -294,7 +297,10 @@ export default function BookingSystem() {
               <Button
                 disabled={!date || !selectedTime || !name || isSubmitting}
                 onClick={handleSubmit}
-                className="w-full md:w-auto px-12 py-7 bg-black text-gold hover:bg-gold hover:text-white uppercase tracking-[0.3em] font-montserrat text-[10px] transition-all duration-500 rounded-none"
+                className="w-full md:w-auto px-12 py-7 text-black hover:brightness-110 uppercase tracking-[0.3em] font-montserrat text-[10px] transition-all duration-500 rounded-none shadow-xl border-none"
+                style={{
+                  background: "linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)",
+                }}
               >
                 {isSubmitting ? (
                   <>

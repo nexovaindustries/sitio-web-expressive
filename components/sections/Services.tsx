@@ -131,9 +131,12 @@ export default function Services() {
               onClick={() => setActiveCategory(cat)}
               className={`font-montserrat text-[10px] uppercase tracking-[0.3em] px-8 py-3 border transition-all duration-400 ${
                 activeCategory === cat
-                  ? "bg-black text-gold border-black"
+                  ? "text-black border-transparent shadow-lg"
                   : "border-gray-200 hover:border-gold hover:text-gold"
               }`}
+              style={activeCategory === cat ? { 
+                background: "linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)" 
+              } : {}}
             >
               {cat}
             </button>
@@ -188,7 +191,8 @@ export default function Services() {
                 <a 
                   href="#booking" 
                   onClick={() => window.dispatchEvent(new CustomEvent("selectService", { detail: "Ritual de Juventud (Exosomas)" }))}
-                  className="inline-block mt-6 px-8 py-3 bg-gold text-black font-montserrat text-[10px] uppercase tracking-widest hover:bg-white transition-colors"
+                  className="inline-block mt-6 px-8 py-3 text-black font-montserrat text-[10px] uppercase tracking-widest hover:brightness-110 transition-all shadow-lg"
+                  style={{ background: "linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)" }}
                 >
                   Agendar
                 </a>

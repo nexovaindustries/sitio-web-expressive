@@ -122,14 +122,21 @@ export default function Hero() {
         <div className="reveal flex flex-col md:flex-row items-center justify-center gap-6" style={{ animationDelay: "0.6s" }}>
           <a
             href="#services"
-            className="group relative px-10 py-5 bg-[#D4AF37] text-black font-montserrat text-[10px] uppercase tracking-[0.3em] overflow-hidden transition-all duration-500 hover:bg-white"
+            className="group relative px-10 py-5 font-montserrat text-[10px] uppercase tracking-[0.3em] overflow-hidden transition-all duration-500 text-black"
+            style={{ 
+              background: "linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)",
+            }}
           >
             <span className="relative z-10">Explorar Rituales</span>
-            <span className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700" />
+            <span className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] bg-gradient-to-r from-transparent via-white/40 to-transparent transition-transform duration-700" />
           </a>
           <a
             href="#booking"
-            className="relative z-10 font-montserrat text-[10px] uppercase tracking-[0.3em] text-white/70 border-b border-white/30 pb-1 hover:text-[#D4AF37] hover:border-[#D4AF37] transition-all duration-300"
+            className="relative z-10 font-montserrat text-[10px] uppercase tracking-[0.3em] transition-all duration-300 pb-1"
+            style={{
+              color: "#D4AF37",
+              borderBottom: "1px solid rgba(212,175,55,0.5)",
+            }}
           >
             Reservar Cita
           </a>
