@@ -21,8 +21,8 @@ export default function OrnamentalE({ className = "" }: { className?: string }) 
         aria-hidden="true"
         style={{
           position: "absolute",
-          top: "0.1em",
-          left: 0,
+          top: "0.22em",
+          left: "-0.15em",
           height: "1.5em",
           width: `${1.5 * (1102 / 604)}em`,
           backgroundImage: "url('/ornamental-e-transparent.png')",
