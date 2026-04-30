@@ -210,7 +210,7 @@ export default function BookingSystem() {
                 mode="single"
                 selected={date}
                 onSelect={setDate}
-                className="mx-auto w-full max-w-full"
+                className="mx-auto max-w-md w-full"
                 disabled={(day) => {
                   const today = new Date();
                   today.setHours(0, 0, 0, 0);
