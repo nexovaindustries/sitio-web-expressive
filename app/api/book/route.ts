@@ -175,10 +175,10 @@ export async function POST(req: Request) {
       dateISO ? createCalendarEvent(name, email, service, dateISO, time) : Promise.resolve(null),
 
       // 2. Confirmación directa al CLIENTE usando Resend
-      email && resend
+      email && email.includes("@") && resend
         ? resend.emails.send({
             from: fromEmail,
-            to: [email],
+            to: [email.trim()],
             subject: `✨ Tu cita en Expressive está confirmada — ${date} ${time}`,
             html: clientEmailHtml(name, service, date, time),
           })
@@ -188,21 +188,25 @@ export async function POST(req: Request) {
       resend
         ? resend.emails.send({
             from: fromEmail,
-            to: [adminEmail],
+            to: [adminEmail.trim()],
             subject: `🚨 NUEVA RESERVA: ${service} — ${name}`,
             html: adminEmailHtml(name, email, service, date, time),
           })
         : Promise.resolve(null),
     ]);
 
+    let errors = [];
     if (calendarResult.status === "rejected") {
       console.error("Google Calendar error:", calendarResult.reason);
+      errors.push("calendar_error");
     }
     if (clientEmailResult.status === "rejected") {
       console.error("Client email error:", clientEmailResult.reason);
+      errors.push("client_email_error");
     }
     if (adminEmailResult.status === "rejected") {
       console.error("Admin email error:", adminEmailResult.reason);
+      errors.push("admin_email_error");
     }
 
     return NextResponse.json({
@@ -210,10 +214,10 @@ export async function POST(req: Request) {
       calendar: calendarResult.status === "fulfilled" ? "ok" : "error",
       emailClient: clientEmailResult.status === "fulfilled" ? "ok" : "error",
       emailAdmin: adminEmailResult.status === "fulfilled" ? "ok" : "error",
-      _calendarError: calendarResult.status === "rejected" ? String(calendarResult.reason) : null
+      errors: errors.length > 0 ? errors : null
     });
   } catch (error) {
     console.error("Booking error:", error);
-    return NextResponse.json({ error: "Error interno del servidor", _error: String(error) }, { status: 500 });
+    return NextResponse.json({ error: "Error interno del servidor", details: String(error) }, { status: 500 });
   }
 }
