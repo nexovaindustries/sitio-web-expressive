@@ -165,10 +165,12 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Faltan campos requeridos" }, { status: 400 });
     }
 
-    const adminEmail = process.env.ADMIN_EMAIL || "estetica.expressiveperu@gmail.com";
+    const adminEmail = (process.env.ADMIN_EMAIL || "estetica.expressiveperu@gmail.com").trim();
     const resendApiKey = process.env.RESEND_API_KEY;
     const resend = resendApiKey ? new Resend(resendApiKey) : null;
-    const fromEmail = "Expressive <onboarding@resend.dev>";
+    const fromEmail = "onboarding@resend.dev"; // Remitente estándar para evitar filtros de spam iniciales
+
+    console.log(`Intentando enviar reserva a: ${adminEmail} (Resend disponible: ${!!resend})`);
 
     const [calendarResult, clientEmailResult, adminEmailResult] = await Promise.allSettled([
       // 1. Crear evento en Google Calendar
