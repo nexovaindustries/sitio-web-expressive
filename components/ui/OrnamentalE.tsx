@@ -25,10 +25,11 @@ export default function OrnamentalE({ className = "" }: { className?: string }) 
           left: "-0.15em",
           height: "1.5em",
           width: `${1.5 * (1102 / 604)}em`,
-          backgroundImage: "url('/ornamental-e-transparent.png')",
-          backgroundSize: "100% 100%",
-          backgroundRepeat: "no-repeat",
-          filter: "brightness(0) invert(1)",
+          backgroundColor: "#D4AF37",
+          WebkitMaskImage: "url('/ornamental-e-transparent.png')",
+          maskImage: "url('/ornamental-e-transparent.png')",
+          WebkitMaskSize: "100% 100%",
+          maskSize: "100% 100%",
           zIndex: -1,
         }}
       />
