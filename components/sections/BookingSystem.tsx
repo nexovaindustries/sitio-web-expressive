@@ -143,7 +143,7 @@ export default function BookingSystem() {
   }
 
   return (
-    <section className="py-32 bg-black scroll-mt-24 relative overflow-hidden" id="booking">
+    <section className="pt-12 pb-32 bg-black scroll-mt-10 relative overflow-hidden" id="booking">
 
       {/* Fondo negro geométrico dorado */}
       <div className="absolute inset-0 pointer-events-none">
