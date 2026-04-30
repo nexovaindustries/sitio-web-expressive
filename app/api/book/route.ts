@@ -170,7 +170,7 @@ export async function POST(req: Request) {
     const resend = resendApiKey ? new Resend(resendApiKey) : null;
     const fromEmail = "Expressive <onboarding@resend.dev>";
 
-    const [calendarResult, clientEmailResult] = await Promise.allSettled([
+    const [calendarResult, clientEmailResult, adminEmailResult] = await Promise.allSettled([
       // 1. Crear evento en Google Calendar
       dateISO ? createCalendarEvent(name, email, service, dateISO, time) : Promise.resolve(null),
 
@@ -178,9 +178,19 @@ export async function POST(req: Request) {
       email && resend
         ? resend.emails.send({
             from: fromEmail,
-            to: [email], // <- Como solicitaste, solo envía al cliente
+            to: [email],
             subject: `✨ Tu cita en Expressive está confirmada — ${date} ${time}`,
             html: clientEmailHtml(name, service, date, time),
+          })
+        : Promise.resolve(null),
+
+      // 3. Notificación al ADMINISTRADOR (Expressive) usando Resend
+      resend
+        ? resend.emails.send({
+            from: fromEmail,
+            to: [adminEmail],
+            subject: `🚨 NUEVA RESERVA: ${service} — ${name}`,
+            html: adminEmailHtml(name, email, service, date, time),
           })
         : Promise.resolve(null),
     ]);
@@ -191,11 +201,15 @@ export async function POST(req: Request) {
     if (clientEmailResult.status === "rejected") {
       console.error("Client email error:", clientEmailResult.reason);
     }
+    if (adminEmailResult.status === "rejected") {
+      console.error("Admin email error:", adminEmailResult.reason);
+    }
 
     return NextResponse.json({
       message: "Reserva procesada",
       calendar: calendarResult.status === "fulfilled" ? "ok" : "error",
-      email: clientEmailResult.status === "fulfilled" ? "ok" : "error",
+      emailClient: clientEmailResult.status === "fulfilled" ? "ok" : "error",
+      emailAdmin: adminEmailResult.status === "fulfilled" ? "ok" : "error",
       _calendarError: calendarResult.status === "rejected" ? String(calendarResult.reason) : null
     });
   } catch (error) {
