@@ -138,7 +138,7 @@ export function Location() {
             <div className="w-6 h-px bg-[#D4AF37]/60" />
             <span className="font-montserrat text-[10px] uppercase tracking-[0.5em] text-[#D4AF37] font-semibold">Encuéntranos</span>
           </div>
-          <h2 className="font-playfair text-4xl text-black mb-8">Nuestra Ubicación</h2>
+          <h2 className="font-playfair text-4xl text-black mb-8">Nuestro Consultorio Estético</h2>
           <div className="space-y-6">
             <div className="flex items-start gap-4">
               <span className="material-symbols-outlined text-gold">location_on</span>

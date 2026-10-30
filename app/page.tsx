@@ -66,7 +66,7 @@ export default function Home() {
                 <h3 className="font-playfair text-3xl text-[#D4AF37] uppercase tracking-widest">Expressive</h3>
               </div>
               <p className="font-montserrat text-xs text-gray-500 max-w-xs leading-relaxed mb-8">
-                Elevando los estándares de la belleza en Arequipa a través de tecnología avanzada y rituales curados de bienestar.
+                Consultorio estético en Cayma, Arequipa. Elevando los estándares de la belleza a través de tecnología avanzada y rituales curados de bienestar.
               </p>
               {/* Línea decorativa dorada */}
               <div className="w-16 h-px bg-gradient-to-r from-[#D4AF37]/60 to-transparent" />

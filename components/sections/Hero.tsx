@@ -89,11 +89,11 @@ export default function Hero() {
 
         <div className="reveal mb-8">
           <div className="inline-flex items-center gap-4">
-            <div className="w-8 h-px bg-[#D4AF37]/70" />
-            <span className="font-montserrat text-[10px] uppercase tracking-[0.5em] text-[#D4AF37] font-semibold">
-              Belleza & Especialización
+            <div className="hidden sm:block w-8 h-px bg-[#D4AF37]/70" />
+            <span className="font-montserrat text-[10px] uppercase tracking-[0.3em] sm:tracking-[0.5em] text-[#D4AF37] font-semibold">
+              Consultorio Estético en Arequipa
             </span>
-            <div className="w-8 h-px bg-[#D4AF37]/70" />
+            <div className="hidden sm:block w-8 h-px bg-[#D4AF37]/70" />
           </div>
         </div>
 
