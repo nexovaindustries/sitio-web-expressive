@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Montserrat, Cormorant_Garamond, Cinzel_Decorative, Pinyon_Script } from "next/font/google";
 import "./globals.css";
+import { site } from "@/lib/site";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -32,8 +33,29 @@ const pinyon = Pinyon_Script({
 });
 
 export const metadata: Metadata = {
-  title: "Expressive - Estética Facial & Corporal",
-  description: "Tratamientos de estética facial y corporal de alta gama. Belleza curada, esculpida con arte.",
+  metadataBase: new URL(site.url),
+  title: site.title,
+  description: site.description,
+  keywords: [
+    "consultorio estético",
+    "consultorio estético Arequipa",
+    "estética facial y corporal",
+    "centro de estética Cayma",
+    "botox Arequipa",
+    "lipopapada enzimática",
+    "plasma rico en plaquetas",
+  ],
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "es_PE",
+    url: "/",
+    siteName: site.name,
+    title: site.title,
+    description: site.description,
+    images: [{ url: "/foto1.jpg", alt: "Expressive, consultorio estético en Arequipa" }],
+  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({
