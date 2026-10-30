@@ -1,7 +1,7 @@
 // Datos del negocio usados en SEO (metadata, JSON-LD, sitemap).
 // Si se conecta un dominio propio, basta con cambiar `url`.
 export const site = {
-  url: "https://sitio-web-expressive.vercel.app",
+  url: "https://www.esteticaexpressive.com",
   name: "Expressive",
   title: "Expressive | Consultorio Estético en Arequipa – Estética Facial y Corporal",
   description:
