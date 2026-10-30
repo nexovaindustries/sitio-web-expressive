@@ -78,7 +78,7 @@ const jsonLd = {
   "@type": "BeautySalon",
   "@id": `${site.url}/#negocio`,
   name: site.name,
-  alternateName: "Expressive Consultorio Estético",
+  alternateName: ["Expressive Estética Facial & Corporal", "Expressive Consultorio Estético"],
   description: site.description,
   url: site.url,
   image: `${site.url}/foto1.jpg`,
@@ -92,6 +92,15 @@ const jsonLd = {
     addressCountry: site.address.country,
   },
   areaServed: { "@type": "City", name: "Arequipa" },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "09:00",
+      closes: "18:00",
+    },
+    { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "10:00", closes: "13:00" },
+  ],
   hasOfferCatalog: {
     "@type": "OfferCatalog",
     name: "Tratamientos de estética facial y corporal",

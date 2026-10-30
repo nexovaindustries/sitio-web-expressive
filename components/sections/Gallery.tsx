@@ -154,6 +154,14 @@ export function Location() {
                 <p className="font-montserrat text-sm text-gray-500">951 108 796</p>
               </div>
             </div>
+            <div className="flex items-start gap-4">
+              <span className="material-symbols-outlined text-gold">schedule</span>
+              <div>
+                <p className="font-montserrat text-sm font-bold">Horario de Atención</p>
+                <p className="font-montserrat text-sm text-gray-500">Lunes a viernes: 9:00 a. m. – 6:00 p. m.</p>
+                <p className="font-montserrat text-sm text-gray-500">Sábados: 10:00 a. m. – 1:00 p. m.</p>
+              </div>
+            </div>
           </div>
           <a 
              href="https://www.google.com/maps/search/?api=1&query=Pasaje+Santa+Cruz+205,+Cayma,+Arequipa" 
