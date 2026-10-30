@@ -58,6 +58,48 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
+const services = [
+  "Reducción de Medidas",
+  "Aumento de Glúteos",
+  "Lipopapada Enzimática",
+  "Botox",
+  "Plasma Rico en Plaquetas",
+  "Tratamiento Post-Lipo",
+  "Vitamina C IV",
+  "Limpieza Facial",
+  "Alopecia",
+];
+
+// Datos estructurados para búsquedas locales (Google Maps / "cerca de mí")
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BeautySalon",
+  "@id": `${site.url}/#negocio`,
+  name: site.name,
+  alternateName: "Expressive Consultorio Estético",
+  description: site.description,
+  url: site.url,
+  image: `${site.url}/foto1.jpg`,
+  logo: `${site.url}/logo.png`,
+  telephone: site.phone,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: site.address.street,
+    addressLocality: `${site.address.district}, ${site.address.city}`,
+    addressRegion: site.address.region,
+    addressCountry: site.address.country,
+  },
+  areaServed: { "@type": "City", name: "Arequipa" },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Tratamientos de estética facial y corporal",
+    itemListElement: services.map((name) => ({
+      "@type": "Offer",
+      itemOffered: { "@type": "Service", name },
+    })),
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -68,6 +110,10 @@ export default function RootLayout({
       <head>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" />
         <style>{`* { cursor: none !important; }`}</style>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+        />
       </head>
       <body
         className={`${playfair.variable} ${montserrat.variable} ${cormorant.variable} ${cinzel.variable} ${pinyon.variable} font-body antialiased selection:bg-gold selection:text-white`}
