@@ -56,10 +56,8 @@ export const metadata: Metadata = {
     images: [{ url: "/foto1.jpg", alt: "Expressive, consultorio estético en Arequipa" }],
   },
   robots: { index: true, follow: true },
-  // Search Console: www.esteticaexpressive.com y sitio-web-expressive.vercel.app
-  verification: {
-    google: ["2eroeMLykMl2oAYrdSMpYSjFRcNaET0xnpdWJWWI6aU", "_4nViKxV2-WYcC2eJfKMiDPOziWBNLI8PnF6027vwXs"],
-  },
+  // Search Console: www.esteticaexpressive.com
+  verification: { google: "2eroeMLykMl2oAYrdSMpYSjFRcNaET0xnpdWJWWI6aU" },
 };
 
 const services = [
