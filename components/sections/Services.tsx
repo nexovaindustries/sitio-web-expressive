@@ -1,82 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-
-const services = [
-  {
-    id: 1,
-    title: "Reducción de Medidas",
-    desc: "Programa integral para esculpir tu silueta.",
-    category: "corporal",
-    price: "S/ 500",
-    details: "(8 Sesiones)",
-  },
-  {
-    id: 2,
-    title: "Aumento de Glúteos",
-    desc: "Firmeza y volumen con biotecnología de peptonas.",
-    category: "corporal",
-    price: "S/ 200",
-    details: "(Por Sesión)",
-  },
-  {
-    id: 3,
-    title: "Lipopapada Enzimática",
-    desc: "Perfilamiento facial avanzado y definición elegante.",
-    category: "corporal",
-    price: "S/ 250",
-    details: "(Por Sesión)",
-  },
-  {
-    id: 4,
-    title: "Botox",
-    desc: "Elimina arrugas en 3 zonas con resultados naturales.",
-    category: "facial",
-    price: "S/ 600",
-    details: "(Desde 3 zonas)",
-  },
-  {
-    id: 5,
-    title: "Plasma Rico en Plaquetas",
-    desc: "Bioestimulación cutánea para una piel radiante.",
-    category: "facial",
-    price: "S/ 100",
-    details: "(Por Sesión)",
-  },
-  {
-    id: 6,
-    title: "Tratamiento Post-Lipo",
-    desc: "Recuperación asistida con drenaje linfático especializado.",
-    category: "corporal",
-    price: "S/ 500",
-    details: "(10 Sesiones)",
-  },
-  {
-    id: 7,
-    title: "Vitamina C IV",
-    desc: "Refuerzo inmunológico y antioxidante profundo.",
-    category: "salud",
-    price: "S/ 140",
-    details: "(Endovenosa)",
-  },
-  {
-    id: 8,
-    title: "Limpieza Facial",
-    desc: "Higiene profunda y renovación de tu piel.",
-    category: "facial",
-    price: "S/ 50",
-    details: "(Desde S/ 50)",
-  },
-  {
-    id: 9,
-    title: "Alopecia",
-    desc: "Tratamiento capilar especializado para frenar la caída.",
-    category: "salud",
-    price: "S/ 100",
-    details: "(Por Sesión)",
-  },
-];
+import { services } from "@/lib/services";
 
 const categories = ["Todos", "Corporal", "Facial", "Salud", "Rejuvenecimiento"];
 
@@ -210,6 +137,12 @@ export default function Services() {
                 <h3 className="font-playfair text-2xl text-black mb-4">{service.title}</h3>
                 <p className="font-montserrat text-sm text-gray-500 leading-relaxed">{service.desc}</p>
                 <p className="font-montserrat text-[10px] text-gold mt-4 uppercase tracking-widest">{service.details}</p>
+                <Link
+                  href={`/tratamientos/${service.slug}`}
+                  className="inline-block mt-6 font-montserrat text-[10px] uppercase tracking-[0.3em] text-black/60 border-b border-gold/40 pb-1 hover:text-gold transition-colors"
+                >
+                  Ver más
+                </Link>
               </div>
               <div className="mt-auto border-t border-gray-50 pt-8 flex items-center justify-between">
                 <span className="font-playfair text-2xl text-black">{service.price}</span>
