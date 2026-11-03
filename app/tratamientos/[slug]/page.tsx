@@ -47,6 +47,7 @@ export default async function TreatmentPage({ params }: Props) {
     `Hola, quisiera información sobre ${service.title} en Expressive.`
   )}`;
   const others = services.filter((s) => s.slug !== service.slug);
+  const bookingHref = `/?servicio=${encodeURIComponent(service.title)}#booking`;
 
   const jsonLd = [
     {
@@ -119,7 +120,7 @@ export default async function TreatmentPage({ params }: Props) {
           <p className="font-montserrat text-[10px] uppercase tracking-widest text-white/40 mb-12">{service.details}</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             <Link
-              href="/#booking"
+              href={bookingHref}
               className="px-10 py-4 text-black font-montserrat text-[10px] uppercase tracking-widest hover:brightness-110 transition-all shadow-lg"
               style={{ background: goldGradient }}
             >
@@ -173,7 +174,7 @@ export default async function TreatmentPage({ params }: Props) {
               Sábados: 10:00 a. m. – 1:00 p. m.
             </p>
             <Link
-              href="/#booking"
+              href={bookingHref}
               className="inline-block px-10 py-4 text-black font-montserrat text-[10px] uppercase tracking-widest hover:brightness-110 transition-all"
               style={{ background: goldGradient }}
             >

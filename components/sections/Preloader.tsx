@@ -7,6 +7,12 @@ export default function Preloader() {
   const [phase, setPhase] = useState<"glow" | "fade">("glow");
 
   useEffect(() => {
+    // Si se llega a una sección (p. ej. /#booking desde un tratamiento), no tapar ni subir al inicio
+    if (window.location.hash) {
+      setLoading(false);
+      return;
+    }
+
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
     }

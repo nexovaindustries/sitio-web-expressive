@@ -25,6 +25,23 @@ export default function BookingSystem() {
     return () => window.removeEventListener("selectService", handleSelectService);
   }, []);
 
+  // Llegada desde una página de tratamiento: /?servicio=Botox#booking
+  React.useEffect(() => {
+    const url = new URL(window.location.href);
+    const preselected = url.searchParams.get("servicio");
+    if (preselected) {
+      setService(preselected);
+      url.searchParams.delete("servicio");
+      window.history.replaceState(null, "", url.pathname + url.search + url.hash);
+    }
+    if (url.hash === "#booking") {
+      const timer = setTimeout(() => {
+        document.getElementById("booking")?.scrollIntoView({ block: "start" });
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
   // Fetch booked slots from Google Calendar when date changes
   // Helper: fecha local en formato YYYY-MM-DD (sin conversión a UTC)
   const toLocalISO = (d: Date) => {
