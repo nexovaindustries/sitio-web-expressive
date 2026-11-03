@@ -9,10 +9,10 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { name: "Servicios", href: "#services" },
-    { name: "Galería", href: "#gallery" },
-    { name: "Agendar Cita", href: "#booking" },
-    { name: "Ubicación", href: "#ubicacion" },
+    { name: "Servicios", href: "/#services" },
+    { name: "Galería", href: "/#gallery" },
+    { name: "Agendar Cita", href: "/#booking" },
+    { name: "Ubicación", href: "/#ubicacion" },
   ];
 
   return (
