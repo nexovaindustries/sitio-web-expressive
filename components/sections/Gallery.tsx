@@ -4,11 +4,11 @@ import Image from "next/image";
 
 export default function Gallery() {
   const images = [
-    { src: "/foto1.jpg", alt: "Procedimiento Expressive", colSpan: "md:col-span-2", rowSpan: "md:row-span-2" },
-    { src: "/img4.jpg", alt: "Cuidado de Piel", colSpan: "", rowSpan: "" },
-    { src: "/img3.jpg", alt: "Bienestar", colSpan: "", rowSpan: "" },
-    { src: "/img2.jpg", alt: "Estética Corporal", colSpan: "md:col-span-2", rowSpan: "md:row-span-2" },
-    { src: "/img1.jpg", alt: "Tratamiento Facial", colSpan: "", rowSpan: "" },
+    { src: "/foto1.jpg", alt: "Procedimiento estético facial en Expressive, consultorio estético en Cayma, Arequipa", colSpan: "md:col-span-2", rowSpan: "md:row-span-2" },
+    { src: "/img4.jpg", alt: "Tratamiento de cuidado de la piel en Expressive Arequipa", colSpan: "", rowSpan: "" },
+    { src: "/img3.jpg", alt: "Ambiente de bienestar en el salón de estética Expressive", colSpan: "", rowSpan: "" },
+    { src: "/img2.jpg", alt: "Tratamiento de estética corporal en Expressive, Arequipa", colSpan: "md:col-span-2", rowSpan: "md:row-span-2" },
+    { src: "/img1.jpg", alt: "Tratamiento facial en el consultorio estético Expressive", colSpan: "", rowSpan: "" },
   ];
 
   return (
