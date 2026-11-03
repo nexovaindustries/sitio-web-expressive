@@ -5,6 +5,7 @@ import BookingSystem from "@/components/sections/BookingSystem";
 import Gallery, { Location } from "@/components/sections/Gallery";
 import Preloader, { CustomCursor } from "@/components/sections/Preloader";
 import Footer from "@/components/sections/Footer";
+import About from "@/components/sections/About";
 
 export default function Home() {
   return (
@@ -27,6 +28,10 @@ export default function Home() {
       <div className="w-full h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent" />
 
       <Gallery />
+
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent" />
+
+      <About />
 
       <div className="w-full h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent" />
 
