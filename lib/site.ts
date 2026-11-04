@@ -12,6 +12,7 @@ export const site = {
     district: "Cayma",
     city: "Arequipa",
     region: "Arequipa",
+    postalCode: "04017",
     country: "PE",
   },
 };
