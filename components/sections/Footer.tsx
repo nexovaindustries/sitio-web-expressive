@@ -58,6 +58,16 @@ export default function Footer() {
                 <li>Pasaje Santa Cruz 205, Int. 305, Cayma</li>
                 <li>951 108 796</li>
                 <li>Arequipa, Perú</li>
+                <li>
+                  <a
+                    href="https://www.instagram.com/expressive_aqp/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-[#D4AF37] transition-colors duration-300"
+                  >
+                    Instagram: @expressive_aqp
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
