@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { site } from "@/lib/site";
 
 export default function Gallery() {
   const images = [
@@ -164,7 +165,7 @@ export function Location() {
             </div>
           </div>
           <a 
-             href="https://www.google.com/maps/search/?api=1&query=Pasaje+Santa+Cruz+205,+Cayma,+Arequipa" 
+             href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.mapsQuery)}`} 
              target="_blank"
              className="inline-block mt-10 px-8 py-4 border border-gold text-gold font-montserrat text-[10px] uppercase tracking-widest hover:bg-gold hover:text-white transition-all"
           >
@@ -173,7 +174,7 @@ export function Location() {
         </div>
         <div className="w-full md:flex-1 h-[300px] sm:h-[380px] md:h-[420px] rounded-3xl overflow-hidden shadow-2xl relative reveal-right">
           <iframe
-            src="https://maps.google.com/maps?q=Pasaje%20Santa%20Cruz%20205,%20Cayma,%20Arequipa&t=&z=17&ie=UTF8&iwloc=&output=embed"
+            src={`https://maps.google.com/maps?q=${encodeURIComponent(site.mapsQuery)}&t=&z=17&ie=UTF8&iwloc=&output=embed`}
             style={{ border: 0, width: "100%", height: "100%", display: "block" }}
             allowFullScreen
             loading="lazy"

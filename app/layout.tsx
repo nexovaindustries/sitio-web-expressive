@@ -90,7 +90,7 @@ const jsonLd = {
   telephone: site.phone,
   priceRange: "S/ 50 – S/ 600",
   currenciesAccepted: "PEN",
-  hasMap: "https://www.google.com/maps/search/?api=1&query=Expressive+Est%C3%A9tica+Facial+%26+Corporal+Cayma+Arequipa",
+  hasMap: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.mapsQuery)}`,
   keywords: "consultorio estético, salón de estética, centro de estética, estética facial y corporal, Arequipa, Cayma",
   address: {
     "@type": "PostalAddress",
