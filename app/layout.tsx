@@ -82,7 +82,7 @@ const jsonLd = {
   // Mismo nombre que el Perfil de Empresa en Google (hay otro "Expressive" en Bolivia)
   name: "Expressive Estética Facial & Corporal",
   alternateName: ["Expressive", "Expressive Arequipa", "Expressive Consultorio Estético", "Expressive Salón de Estética"],
-  sameAs: ["https://www.instagram.com/expressive_aqp/"],
+  sameAs: ["https://www.instagram.com/expressive_aqp/", "https://www.google.com/search?kgmid=/g/11p2f355sn"],
   description: site.description,
   url: site.url,
   image: `${site.url}/foto1.jpg`,
